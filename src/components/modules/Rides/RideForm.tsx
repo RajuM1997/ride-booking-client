@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { useReqARideMutation } from "@/redux/features/rider/ride.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -31,6 +32,7 @@ const RideForm = () => {
     },
   });
   const [rideRequest] = useReqARideMutation();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     console.log(data);
@@ -41,14 +43,18 @@ const RideForm = () => {
     try {
       const toastId = toast.loading("Ride Making...");
       const result = await rideRequest(rideInfo).unwrap();
-      console.log(result);
+
       if (result.success) {
         toast.success("You ride request successfully created", { id: toastId });
+        setTimeout(() => {
+          navigate("/my-ride");
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div>
       <Form {...form}>

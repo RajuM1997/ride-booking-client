@@ -1,5 +1,11 @@
+import BookRide from "@/components/modules/Driver/BookRide";
+
 const BookARide = () => {
-  return <div>book a ride</div>;
+  return (
+    <div>
+      <BookRide />
+    </div>
+  );
 };
 
 export default BookARide;

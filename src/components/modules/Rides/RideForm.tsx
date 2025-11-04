@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useReqARideMutation } from "@/redux/features/rider/ride.api";
+import type { IErrorResponse } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -40,8 +41,8 @@ const RideForm = () => {
       ...data,
       fare: Number(data.fare),
     };
+    const toastId = toast.loading("Ride Making...");
     try {
-      const toastId = toast.loading("Ride Making...");
       const result = await rideRequest(rideInfo).unwrap();
 
       if (result.success) {
@@ -51,7 +52,8 @@ const RideForm = () => {
         }, 1000);
       }
     } catch (error) {
-      console.log(error);
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
     }
   };
 

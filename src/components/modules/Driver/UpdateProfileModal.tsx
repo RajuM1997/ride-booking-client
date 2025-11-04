@@ -19,31 +19,57 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useUpdateProfileMutation } from "@/redux/features/user/user.api";
+import type { IErrorResponse, IUser } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const registerSchema = z.object({
-  pickup: z.string(),
-  destination: z.string(),
-  fare: z.string(),
+  name: z.string(),
+  phone: z.string(),
+  licenseNumber: z.string(),
+  vehicleType: z.string(),
+  vehicleNumber: z.string(),
 });
+type Props = {
+  profileData: IUser;
+};
 
-const UpdateProfileModal = () => {
+const UpdateProfileModal = ({ profileData }: Props) => {
   const [open, setOpen] = useState(false);
+  const [updateProfile] = useUpdateProfileMutation();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      pickup: "",
-      destination: "",
-      fare: "",
+      name: profileData.name || "",
+      phone: profileData.phone || "",
+      licenseNumber: profileData.driver?.licenseNumber || "",
+      vehicleType: profileData.driver?.vehicleType || "",
+      vehicleNumber: profileData.driver?.vehicleNumber || "",
     },
   });
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
-    console.log(data);
+    const userInfo = {
+      ...data,
+      id: profileData._id,
+    };
+    const toastId = toast.loading("Profile updating...");
+    try {
+      const result = await updateProfile(userInfo).unwrap();
+      if (result.success) {
+        toast.success("Profile updated successfully", { id: toastId });
+        setOpen(false);
+      }
+    } catch (error: unknown) {
+      setOpen(false);
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
+    }
   };
   return (
     <div>
@@ -54,7 +80,7 @@ const UpdateProfileModal = () => {
           </Button>
         </DialogTrigger>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form id="updateProfile" onSubmit={form.handleSubmit(onSubmit)}>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
                 <DialogTitle>Edit profile</DialogTitle>
@@ -65,15 +91,15 @@ const UpdateProfileModal = () => {
               </DialogHeader>
               <FormField
                 control={form.control}
-                name="pickup"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Pickup</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Dhaka" {...field} />
+                      <Input placeholder="MR. X" {...field} />
                     </FormControl>
                     <FormDescription className="sr-only">
-                      This is your public pickup.
+                      This is your public name.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -81,15 +107,15 @@ const UpdateProfileModal = () => {
               />
               <FormField
                 control={form.control}
-                name="destination"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Destination</FormLabel>
+                    <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder="Khulna" type="string" {...field} />
+                      <Input placeholder="017XXXXXXXX" {...field} />
                     </FormControl>
                     <FormDescription className="sr-only">
-                      This is your public destination.
+                      This is your public phone.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -97,15 +123,51 @@ const UpdateProfileModal = () => {
               />
               <FormField
                 control={form.control}
-                name="fare"
+                name="licenseNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Fare</FormLabel>
+                    <FormLabel>License Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="30" type="string" {...field} />
+                      <Input
+                        placeholder="Khulna"
+                        type="#274765FGS44YE"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription className="sr-only">
-                      This is your public fare.
+                      This is your public license number.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vehicleType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vehicle Type</FormLabel>
+                    <FormControl>
+                      <Input placeholder="30" type="auto" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">
+                      This is your public vehicle type.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vehicleNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vehicle Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="30" type="DHAKA, 36A" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">
+                      This is your public vehicle number.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -116,8 +178,8 @@ const UpdateProfileModal = () => {
                 <DialogClose asChild>
                   <Button variant="outline">Cancel</Button>
                 </DialogClose>
-                <Button type="submit" className="w-full">
-                  Submit
+                <Button form="updateProfile" type="submit" className="w-full">
+                  Update
                 </Button>
               </DialogFooter>
             </DialogContent>

@@ -1,5 +1,6 @@
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useUpdateActivityMutation } from "@/redux/features/driver/driver.api";
+import type { IErrorResponse } from "@/types";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -10,9 +11,8 @@ export default function OnlineOfficeToggle() {
   const [updateActivity] = useUpdateActivityMutation();
   const handleActivityStatus = async (status: string) => {
     setOnline(status);
-
+    const toastId = toast.loading("Your Activity Changing...");
     try {
-      const toastId = toast.loading("Your Activity Changing...");
       const res = await updateActivity({
         availabilityStatus: status,
       }).unwrap();
@@ -20,7 +20,8 @@ export default function OnlineOfficeToggle() {
         toast.success(`You are currently ${status}`, { id: toastId });
       }
     } catch (error) {
-      console.log(error);
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
     }
   };
   return (

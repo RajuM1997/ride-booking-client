@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
 import Password from "@/components/ui/Password";
+import type { IErrorResponse } from "@/types";
 
 const registerSchema = z
   .object({
@@ -63,15 +64,17 @@ export function RegisterForm({
       email: data.email,
       password: data.password,
     };
+    const toastId = toast.loading("Login...");
     try {
       await register(userInfo).unwrap();
 
-      toast.success("User created successfully");
+      toast.success("User created successfully", { id: toastId });
       setTimeout(() => {
         navigate("/login");
       }, 1000);
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
     }
   };
 

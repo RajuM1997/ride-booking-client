@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import type { IErrorResponse } from "@/types";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -31,10 +31,10 @@ export function LoginForm({
         toast.success("Logged in successfully");
         navigate("/");
       }
-    } catch (err: any) {
-      console.error(err);
+    } catch (error: unknown) {
+      const err = error as IErrorResponse;
 
-      if (err.data.message === "Your account is not verifed") {
+      if (err.data.message === "Your account is not verified") {
         toast.error("Your account is not verified");
         navigate("/verify", { state: data.email });
       }

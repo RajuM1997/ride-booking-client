@@ -13,7 +13,7 @@ const DriverProfile = () => {
     <div className="w-full grid grid-cols-12 mx-auto gap-5">
       <Card className="py-0 gap-0 col-span-5">
         <div className="ml-auto pr-5 pt-5">
-          <UpdateProfileModal />
+          <UpdateProfileModal profileData={data?.data} />
         </div>
         <CardContent className="p-5">
           <div className="flex pt-5 flex-col gap-6 items-center ">

@@ -11,9 +11,10 @@ export const rideApi = baseApi.injectEndpoints({
     }),
     getAllRide: builder.query({
       query: () => ({
-        url: `/drivers/all-ride?status=REQUESTED`,
+        url: `/drivers/all-ride`,
         method: "GET",
       }),
+      providesTags: ["RIDE"],
     }),
     getDriverRide: builder.query({
       query: () => ({
@@ -29,6 +30,20 @@ export const rideApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["USER"],
     }),
+    driverCancelRide: builder.mutation({
+      query: (id) => ({
+        url: `/drivers/ride/cancel-ride/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["RIDE"],
+    }),
+    driverRideBooking: builder.mutation({
+      query: (id) => ({
+        url: `/drivers/approve/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["RIDE"],
+    }),
   }),
 });
 export const {
@@ -36,4 +51,6 @@ export const {
   useGetAllRideQuery,
   useUpdateActivityMutation,
   useGetDriverRideQuery,
+  useDriverCancelRideMutation,
+  useDriverRideBookingMutation,
 } = rideApi;

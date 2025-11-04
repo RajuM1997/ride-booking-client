@@ -6,9 +6,14 @@ export interface IRide {
   fare: number;
   createdAt: string;
   driver: IDriver;
+  driverRideStatus: IDriverStatus[];
 }
 
 export interface IDriver {
   name: string;
   phone: string;
+}
+export interface IDriverStatus {
+  driverId: string;
+  status: string;
 }

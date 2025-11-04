@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import UpdateProfileModal from "@/components/modules/Driver/UpdateProfileModal";
+import ChangePassword from "@/components/modules/Authentication/ChangePasswordModal";
 
 const DriverProfile = () => {
   const { data } = useUserInfoQuery(undefined);
@@ -43,7 +44,8 @@ const DriverProfile = () => {
             </h3>
           </div>
         </div>
-        <div className="flex flex-1 justify-end items-end  gap-5 p-4">
+        <div className="flex flex-1 justify-center items-end  gap-5 p-4">
+          <ChangePassword />
           <Link to={"/"}>
             <Button variant={"outline"}>Back To Home</Button>
           </Link>

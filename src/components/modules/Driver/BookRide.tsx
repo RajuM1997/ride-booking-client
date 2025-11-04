@@ -7,12 +7,53 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetAllRideQuery } from "@/redux/features/driver/driver.api";
-import type { IRide } from "@/types";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import {
+  useDriverCancelRideMutation,
+  useDriverRideBookingMutation,
+  useGetAllRideQuery,
+} from "@/redux/features/driver/driver.api";
+import type { IErrorResponse, IRide } from "@/types";
+import type { IDriverStatus } from "@/types/ride.type";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 const BookRide = () => {
   const { data } = useGetAllRideQuery(undefined);
+  const { data: userData } = useUserInfoQuery(undefined);
+  const [cancelRide] = useDriverCancelRideMutation();
+  const [bookingRide] = useDriverRideBookingMutation();
+  console.log({ userData });
+
+  const handleRideBooking = async (rideId: string) => {
+    console.log(rideId);
+
+    const toastId = toast.loading("Ride booking...");
+    try {
+      const result = await bookingRide(rideId).unwrap();
+      if (result.success) {
+        toast.success("Ride booking successfully", { id: toastId });
+      }
+    } catch (error: unknown) {
+      const err = error as IErrorResponse;
+      console.log(err);
+
+      toast.error(err?.data?.message, { id: toastId });
+    }
+  };
+
+  const handleCancelRide = async (rideId: string) => {
+    const toastId = toast.loading("Ride cancelling...");
+    try {
+      const result = await cancelRide(rideId).unwrap();
+      if (result.success) {
+        toast.success("Ride cancel successfully", { id: toastId });
+      }
+    } catch (error: unknown) {
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.message, { id: toastId });
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -41,7 +82,32 @@ const BookRide = () => {
                 </TableCell>
                 <TableCell className="lowercase"> {ride.status}</TableCell>
                 <TableCell className="text-right">
-                  <Button size={"sm"}>Book a Ride</Button>
+                  <Button
+                    disabled={ride?.driverRideStatus?.some(
+                      (rideStatus: IDriverStatus) =>
+                        rideStatus.driverId === userData?.data?._id
+                    )}
+                    size={"sm"}
+                    onClick={() => handleRideBooking(ride._id)}
+                  >
+                    Book A Ride
+                  </Button>
+                  <Button
+                    disabled={ride?.driverRideStatus?.some(
+                      (rideStatus: IDriverStatus) =>
+                        rideStatus.driverId === userData?.data?._id
+                    )}
+                    size={"sm"}
+                    className="ml-2 min-w-[140px]"
+                    onClick={() => handleCancelRide(ride._id)}
+                  >
+                    {ride?.driverRideStatus?.some(
+                      (rideStatus: IDriverStatus) =>
+                        rideStatus.driverId === userData?.data?._id
+                    )
+                      ? "All-Ready Cancel"
+                      : "Cancel A Ride"}
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

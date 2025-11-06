@@ -2,13 +2,6 @@ import { baseApi } from "@/redux/baseApi";
 
 export const rideApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    reqARide: builder.mutation({
-      query: (rideInfo) => ({
-        url: "/rides/request",
-        method: "POST",
-        data: rideInfo,
-      }),
-    }),
     getAllRide: builder.query({
       query: () => ({
         url: `/drivers/all-ride`,
@@ -17,9 +10,30 @@ export const rideApi = baseApi.injectEndpoints({
       providesTags: ["RIDE"],
     }),
     getDriverRide: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: `/drivers/my-ride`,
         method: "GET",
+        params,
+      }),
+    }),
+    getDriverActiveRide: builder.query({
+      query: () => ({
+        url: `/drivers/active-ride`,
+        method: "GET",
+      }),
+      providesTags: ["RIDE"],
+    }),
+    getDriverEarning: builder.query({
+      query: () => ({
+        url: `/drivers/driver-earning-all`,
+        method: "GET",
+      }),
+    }),
+    reqARide: builder.mutation({
+      query: (rideInfo) => ({
+        url: "/rides/request",
+        method: "POST",
+        data: rideInfo,
       }),
     }),
     updateActivity: builder.mutation({
@@ -44,6 +58,14 @@ export const rideApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["RIDE"],
     }),
+    changeRideStatus: builder.mutation({
+      query: (rideData) => ({
+        url: `/drivers/${rideData.id}/update-status`,
+        method: "PATCH",
+        data: rideData,
+      }),
+      invalidatesTags: ["RIDE"],
+    }),
   }),
 });
 export const {
@@ -53,4 +75,7 @@ export const {
   useGetDriverRideQuery,
   useDriverCancelRideMutation,
   useDriverRideBookingMutation,
+  useGetDriverEarningQuery,
+  useGetDriverActiveRideQuery,
+  useChangeRideStatusMutation,
 } = rideApi;

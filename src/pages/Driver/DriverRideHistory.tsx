@@ -1,9 +1,9 @@
-import DriverRideTable from "@/components/modules/Driver/DriverRideTable";
+import DriverRideHistoryTable from "@/components/modules/Driver/DriverRideHistoryTable";
 
 const DriverRideHistory = () => {
   return (
     <div>
-      <DriverRideTable />
+      <DriverRideHistoryTable />
     </div>
   );
 };

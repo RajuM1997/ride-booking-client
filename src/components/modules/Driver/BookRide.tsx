@@ -23,11 +23,8 @@ const BookRide = () => {
   const { data: userData } = useUserInfoQuery(undefined);
   const [cancelRide] = useDriverCancelRideMutation();
   const [bookingRide] = useDriverRideBookingMutation();
-  console.log({ userData });
 
   const handleRideBooking = async (rideId: string) => {
-    console.log(rideId);
-
     const toastId = toast.loading("Ride booking...");
     try {
       const result = await bookingRide(rideId).unwrap();
@@ -36,7 +33,6 @@ const BookRide = () => {
       }
     } catch (error: unknown) {
       const err = error as IErrorResponse;
-      console.log(err);
 
       toast.error(err?.data?.message, { id: toastId });
     }
@@ -70,7 +66,7 @@ const BookRide = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data?.length &&
+          {data?.data?.length > 0 &&
             data?.data?.map((ride: IRide, i: number) => (
               <TableRow key={ride._id}>
                 <TableCell className="font-medium">{i + 1}</TableCell>

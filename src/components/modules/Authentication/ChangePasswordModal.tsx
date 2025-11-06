@@ -79,7 +79,7 @@ const ChangePassword = () => {
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button>Reset Password</Button>
+          <Button variant={"outline"}>Reset Password</Button>
         </DialogTrigger>
         <Form {...form}>
           <form id="reset-password" onSubmit={form.handleSubmit(onSubmit)}>

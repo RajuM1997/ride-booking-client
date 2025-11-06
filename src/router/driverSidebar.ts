@@ -1,4 +1,5 @@
 import BookARide from "@/pages/Driver/BookARide";
+import DriverActiveRide from "@/pages/Driver/DriverActiveRide";
 import DriverAnalytics from "@/pages/Driver/DriverAnalytics";
 import DriverProfile from "@/pages/Driver/DriverProfile";
 import DriverRideHistory from "@/pages/Driver/DriverRideHistory";
@@ -22,6 +23,11 @@ export const driverSidebarItems: ISidebarItem[] = [
         title: "Book a ride",
         url: "/driver/book-a-ride",
         component: BookARide,
+      },
+      {
+        title: "Active Ride",
+        url: "/driver/active-ride",
+        component: DriverActiveRide,
       },
       {
         title: "Driver History",

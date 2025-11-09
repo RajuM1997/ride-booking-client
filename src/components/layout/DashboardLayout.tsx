@@ -12,7 +12,6 @@ import OnlineOfficeToggle from "../modules/Driver/OnlineOfflineToggler";
 
 export default function DashboardLayout() {
   const { data } = useUserInfoQuery(undefined);
-  console.log(data);
 
   return (
     <SidebarProvider>

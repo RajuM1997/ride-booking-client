@@ -31,7 +31,6 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
@@ -92,13 +91,12 @@ const DriverRideHistoryTable = () => {
     setClearSearch(false);
     form.reset();
   };
-  console.log(data);
 
   const totalPage = data?.meta?.totalPage || 1;
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <Card className="p-5">
+      <Card className="p-5 mb-5">
         <Form {...form}>
           <form id="search-form" onSubmit={form.handleSubmit(handleSearch)}>
             <div className="flex flex-col gap-3">
@@ -169,7 +167,6 @@ const DriverRideHistoryTable = () => {
                               <Calendar
                                 mode="single"
                                 onSelect={field.onChange}
-                                // onDayBlur={field.onBlur}
                                 captionLayout="dropdown"
                               />
                             </PopoverContent>
@@ -200,7 +197,6 @@ const DriverRideHistoryTable = () => {
             <TableHead>Fare</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -215,14 +211,10 @@ const DriverRideHistoryTable = () => {
                   {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
                 </TableCell>
                 <TableCell className="lowercase"> {ride.status}</TableCell>
-                <TableCell className="text-right">
-                  <Button size={"sm"}>Book a Ride</Button>
-                </TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
-
       {totalPage > 1 && (
         <div className="flex justify-center mt-4">
           <div>

@@ -39,6 +39,8 @@ export default function Navbar() {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
+  console.log(data);
+
   return (
     <header className="border-b">
       <div className="flex h-16 items-center justify-between gap-4 container mx-auto px-4 ">

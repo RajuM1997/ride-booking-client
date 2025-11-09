@@ -1,8 +1,8 @@
 import BookARide from "@/pages/Driver/BookARide";
 import DriverActiveRide from "@/pages/Driver/DriverActiveRide";
 import DriverAnalytics from "@/pages/Driver/DriverAnalytics";
-import DriverProfile from "@/pages/Driver/DriverProfile";
 import DriverRideHistory from "@/pages/Driver/DriverRideHistory";
+import Profile from "@/pages/Profile";
 import type { ISidebarItem } from "@/types";
 
 export const driverSidebarItems: ISidebarItem[] = [
@@ -42,7 +42,7 @@ export const driverSidebarItems: ISidebarItem[] = [
       {
         title: "Profile",
         url: "/driver/my-profile",
-        component: DriverProfile,
+        component: Profile,
       },
     ],
   },

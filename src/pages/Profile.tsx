@@ -2,12 +2,11 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import user1 from "@/assets/user-1.jpeg";
 import { Button } from "@/components/ui/button";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-import UpdateProfileModal from "@/components/modules/Driver/UpdateProfileModal";
+import UpdateProfileModal from "@/components/modules/UpdateProfileModal";
 import ChangePassword from "@/components/modules/Authentication/ChangePasswordModal";
 
-const DriverProfile = () => {
+const Profile = () => {
   const { data } = useUserInfoQuery(undefined);
-  console.log(data);
 
   return (
     <div className="w-full grid grid-cols-12 mx-auto gap-5">
@@ -79,4 +78,4 @@ const DriverProfile = () => {
   );
 };
 
-export default DriverProfile;
+export default Profile;

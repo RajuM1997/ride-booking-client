@@ -35,6 +35,7 @@ const registerSchema = z.object({
   vehicleType: z.string(),
   vehicleNumber: z.string(),
 });
+
 type Props = {
   profileData: IUser;
 };

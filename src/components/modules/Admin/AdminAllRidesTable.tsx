@@ -6,14 +6,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useChangeRideStatusMutation } from "@/redux/features/driver/driver.api";
-import type { IErrorResponse, IRide } from "@/types";
+import type { IRide, IUser } from "@/types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useGetAllRidesQuery } from "@/redux/features/admin/admin.api";
+import {
+  useGetAllRidesQuery,
+  useGetDriversQuery,
+  useGetRidersQuery,
+} from "@/redux/features/admin/admin.api";
 import { format } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -24,7 +26,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -50,58 +51,60 @@ const searchSchema = z.object({
 });
 
 const AdminAllRidesTable = () => {
-  const { data } = useGetAllRidesQuery(undefined);
-  const [changeRideStatus] = useChangeRideStatusMutation();
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
       driver: "",
       rider: "",
       status: "",
-      date: new Date(),
+      date: undefined,
     },
   });
-  const [email, setEmail] = useState<string | undefined>();
-  const [name, setName] = useState<string | undefined>();
-  const [isActive, setIsActive] = useState<string | undefined>();
+  const [driver, setDriver] = useState<string | undefined>();
+  const [rider, setRider] = useState<string | undefined>();
+  const [status, setStatus] = useState<string | undefined>();
+  const [date, setDate] = useState<Date | undefined>();
   const [clearSearch, setClearSearch] = useState(false);
-  const handleStatus = async (status: string, id: string) => {
-    const data = {
-      id,
-      status,
-    };
-
-    const toastId = toast.loading("Status Updating...");
-    try {
-      const res = await changeRideStatus(data).unwrap();
-      if (res.success) {
-        toast.success(`Currently status is ${data.status}`, { id: toastId });
-      }
-    } catch (error) {
-      const err = error as IErrorResponse;
-      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
-    }
-  };
+  const { data } = useGetAllRidesQuery({
+    driver,
+    rider,
+    status,
+    createdAt: date,
+  });
+  const { data: drivers, isLoading: driverLoading } =
+    useGetDriversQuery(undefined);
+  const { data: riders, isLoading: riderLoading } =
+    useGetRidersQuery(undefined);
 
   const handleSearch = async (data: z.infer<typeof searchSchema>) => {
-    if (data.email) {
-      setEmail(data.email);
+    if (data.rider) {
+      setRider(data.rider);
     }
-    if (data.email) {
-      setName(data.email);
+    if (data.driver) {
+      setDriver(data.driver);
     }
-    if (data.isActive) {
-      setIsActive(data.isActive);
+    if (data.status) {
+      setStatus(data.status);
+    }
+    if (data.date) {
+      setDate(data.date);
     }
     setClearSearch(true);
   };
 
   const handleClearSearch = () => {
-    setEmail(undefined);
-    setName(undefined);
-    setIsActive(undefined);
+    setDriver(undefined);
+    setRider(undefined);
+    setStatus(undefined);
+    setDate(undefined);
     setClearSearch(false);
-    form.reset();
+    setClearSearch(false);
+    form.reset({
+      driver: "",
+      rider: "",
+      status: "",
+      date: undefined,
+    });
   };
 
   return (
@@ -121,15 +124,18 @@ const AdminAllRidesTable = () => {
                           <FormLabel>Driver</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            disabled={driverLoading}
+                            value={field.value}
                           >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select a driver" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value={"REQUESTED"}>
-                                Requested
-                              </SelectItem>
+                              {drivers?.data?.map((driver: IUser) => (
+                                <SelectItem value={driver._id} key={driver._id}>
+                                  {driver?.name}
+                                </SelectItem>
+                              ))}
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -143,18 +149,21 @@ const AdminAllRidesTable = () => {
                       name="rider"
                       render={({ field }) => (
                         <FormItem className="flex-1">
-                          <FormLabel>Rider</FormLabel>
+                          <FormLabel>Riders</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            disabled={riderLoading}
+                            value={field.value}
                           >
                             <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select a driver" />
+                              <SelectValue placeholder="Select a rider" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value={"REQUESTED"}>
-                                Requested
-                              </SelectItem>
+                              {riders?.data?.map((rider: IUser) => (
+                                <SelectItem key={rider._id} value={rider._id}>
+                                  {rider.name}
+                                </SelectItem>
+                              ))}
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -171,7 +180,7 @@ const AdminAllRidesTable = () => {
                           <FormLabel>Status</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            value={field.value}
                           >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select a activity type" />
@@ -234,6 +243,7 @@ const AdminAllRidesTable = () => {
                             >
                               <Calendar
                                 mode="single"
+                                selected={field.value}
                                 onSelect={field.onChange}
                                 captionLayout="dropdown"
                               />

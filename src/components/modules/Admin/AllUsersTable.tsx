@@ -18,11 +18,9 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetAllUserQuery } from "@/redux/features/admin/admin.api";
-import { useChangeRideStatusMutation } from "@/redux/features/driver/driver.api";
-import type { IErrorResponse, IUser } from "@/types";
+import type { IUser } from "@/types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,6 +31,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AdminUserActivityUpdate from "./AdminUserActivityUpdateModel";
+import AdminDriverUpdatedModel from "./AdminDriverUpdateModel";
 
 const searchSchema = z.object({
   email: z.string().optional(),
@@ -42,8 +42,7 @@ const searchSchema = z.object({
 
 const AllUsersTable = () => {
   const [activeTab, setActiveTab] = useState("RIDER");
-  const { data } = useGetAllUserQuery({ role: activeTab });
-  const [changeRideStatus] = useChangeRideStatusMutation();
+
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -56,24 +55,12 @@ const AllUsersTable = () => {
   const [name, setName] = useState<string | undefined>();
   const [isActive, setIsActive] = useState<string | undefined>();
   const [clearSearch, setClearSearch] = useState(false);
-  const handleStatus = async (status: string, id: string) => {
-    const data = {
-      id,
-      status,
-    };
-
-    const toastId = toast.loading("Status Updating...");
-    try {
-      const res = await changeRideStatus(data).unwrap();
-      if (res.success) {
-        toast.success(`Currently status is ${data.status}`, { id: toastId });
-      }
-    } catch (error) {
-      const err = error as IErrorResponse;
-      toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
-    }
-  };
-
+  const { data } = useGetAllUserQuery({
+    role: activeTab,
+    email,
+    name,
+    isActive,
+  });
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     console.log("Active tab value:", value);
@@ -83,21 +70,27 @@ const AllUsersTable = () => {
     if (data.email) {
       setEmail(data.email);
     }
-    if (data.email) {
-      setName(data.email);
+    if (data.name) {
+      setName(data.name);
     }
     if (data.isActive) {
       setIsActive(data.isActive);
     }
+
     setClearSearch(true);
   };
+  console.log(data);
 
   const handleClearSearch = () => {
     setEmail(undefined);
     setName(undefined);
     setIsActive(undefined);
     setClearSearch(false);
-    form.reset();
+    form.reset({
+      email: "",
+      name: "",
+      isActive: "",
+    });
   };
 
   return (
@@ -148,7 +141,7 @@ const AllUsersTable = () => {
                           <FormLabel>Activity</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            value={field.value}
                           >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select a activity type" />
@@ -195,11 +188,12 @@ const AllUsersTable = () => {
                 <TableHead>Delete Status</TableHead>
                 <TableHead>Active Status</TableHead>
                 <TableHead>Verified Status</TableHead>
-                <TableHead>Role</TableHead>
+
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data?.data?.length &&
+              {data?.data?.length > 0 &&
                 data?.data?.map((user: IUser, i: number) => (
                   <TableRow key={user._id}>
                     <TableCell className="font-medium">{i + 1}</TableCell>
@@ -209,7 +203,9 @@ const AllUsersTable = () => {
                     <TableCell>{user.isDeleted ? "true" : "false"}</TableCell>
                     <TableCell className="lowercase">{user.isActive}</TableCell>
                     <TableCell>{user.isVerified ? "true" : "false"}</TableCell>
-                    <TableCell className="lowercase">{user.role}</TableCell>
+                    <TableCell className="">
+                      <AdminUserActivityUpdate profileData={user} />
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
@@ -224,9 +220,9 @@ const AllUsersTable = () => {
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Delete Status</TableHead>
-                <TableHead>Active Status</TableHead>
-                <TableHead>Verified Status</TableHead>
                 <TableHead>Role</TableHead>
+                <TableHead>Verified Status</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -235,16 +231,20 @@ const AllUsersTable = () => {
                   <TableRow key={user._id}>
                     <TableCell className="font-medium">{i + 1}</TableCell>
                     <TableCell className="capitalize">{user.name}</TableCell>
-                    <TableCell className="capitalize">{user.email}</TableCell>
+                    <TableCell>{user.email}</TableCell>
                     <TableCell>{user.phone}</TableCell>
                     <TableCell className="lowercase">
                       {user.isDeleted ? "True" : "False"}
                     </TableCell>
-                    <TableCell className="lowercase">{user.isActive}</TableCell>
+                    <TableCell className="lowercase">
+                      {user.driver?.driverStatus}
+                    </TableCell>
                     <TableCell className="lowercase">
                       {user.isVerified ? "True" : "False"}
                     </TableCell>
-                    <TableCell className="lowercase">{user.role}</TableCell>
+                    <TableCell className="lowercase">
+                      <AdminDriverUpdatedModel profileData={user} />
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

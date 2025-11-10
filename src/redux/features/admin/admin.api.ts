@@ -2,13 +2,21 @@ import { baseApi } from "@/redux/baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    updateProfile: builder.mutation({
+    adminUpdateActivity: builder.mutation({
       query: (userInfo) => ({
-        url: `/user/${userInfo.id}`,
+        url: `/site-admin/update-user-activity/${userInfo.id}`,
         method: "PATCH",
         data: userInfo,
       }),
-      invalidatesTags: ["USER"],
+      invalidatesTags: ["ADMIN_USER"],
+    }),
+    adminUpdateDriver: builder.mutation({
+      query: (userInfo) => ({
+        url: `/site-admin/accept-driver-role/${userInfo.id}`,
+        method: "PATCH",
+        data: userInfo,
+      }),
+      invalidatesTags: ["ADMIN_USER"],
     }),
     getAllUser: builder.query({
       query: (params) => ({
@@ -20,17 +28,22 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     getAllRides: builder.query({
       query: (params) => ({
-        url: "/user/me",
+        url: "/site-admin/all-rides",
         method: "GET",
         params,
       }),
       providesTags: ["ADMIN_USER"],
     }),
-    getDriver: builder.query({
-      query: (params) => ({
-        url: "/user/me",
+    getDrivers: builder.query({
+      query: () => ({
+        url: "/site-admin/all-drivers",
         method: "GET",
-        params,
+      }),
+    }),
+    getRiders: builder.query({
+      query: () => ({
+        url: "/site-admin/all-riders",
+        method: "GET",
       }),
     }),
     getRider: builder.query({
@@ -44,9 +57,11 @@ export const adminApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useUpdateProfileMutation,
+  useAdminUpdateActivityMutation,
   useGetAllUserQuery,
   useGetAllRidesQuery,
   useGetRiderQuery,
-  useGetDriverQuery,
+  useGetDriversQuery,
+  useGetRidersQuery,
+  useAdminUpdateDriverMutation,
 } = adminApi;

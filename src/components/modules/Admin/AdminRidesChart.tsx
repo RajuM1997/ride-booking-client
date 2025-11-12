@@ -2,11 +2,11 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-interface EarningsBarChartProps {
+interface AdminRideChartProps {
   data: { x: string; y: number; fillColor?: string; strokeColor?: string }[];
 }
 
-const EarningsBarChart: React.FC<EarningsBarChartProps> = ({ data }) => {
+const AdminRideChart: React.FC<AdminRideChartProps> = ({ data }) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "bar",
@@ -37,4 +37,4 @@ const EarningsBarChart: React.FC<EarningsBarChartProps> = ({ data }) => {
   return <Chart options={options} series={series} type="bar" height={350} />;
 };
 
-export default EarningsBarChart;
+export default AdminRideChart;

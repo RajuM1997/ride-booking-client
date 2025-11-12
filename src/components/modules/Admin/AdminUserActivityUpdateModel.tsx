@@ -67,8 +67,6 @@ const AdminUserActivityUpdate = ({ profileData }: Props) => {
     } catch (error: unknown) {
       setOpen(false);
       const err = error as IErrorResponse;
-      console.log(err);
-
       toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
     }
   };

@@ -53,6 +53,18 @@ export const adminApi = baseApi.injectEndpoints({
         params,
       }),
     }),
+    getPerMonthRidesCount: builder.query({
+      query: () => ({
+        url: "/site-admin/per-month-riders",
+        method: "GET",
+      }),
+    }),
+    getPerMonthRevenue: builder.query({
+      query: () => ({
+        url: "/site-admin/per-month-revenue",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -64,4 +76,6 @@ export const {
   useGetDriversQuery,
   useGetRidersQuery,
   useAdminUpdateDriverMutation,
+  useGetPerMonthRidesCountQuery,
+  useGetPerMonthRevenueQuery,
 } = adminApi;

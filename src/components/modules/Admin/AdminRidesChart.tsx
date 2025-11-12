@@ -1,4 +1,3 @@
-// EarningsBarChart.tsx
 import React from "react";
 import Chart from "react-apexcharts";
 
@@ -11,29 +10,51 @@ const AdminRideChart: React.FC<AdminRideChartProps> = ({ data }) => {
     chart: {
       type: "bar",
       height: 350,
-      toolbar: {
-        show: false,
-      },
+      toolbar: { show: false },
     },
     plotOptions: {
       bar: {
         distributed: true,
         columnWidth: "20%",
+        borderRadius: 6,
+      },
+    },
+    legend: { show: false },
+    xaxis: {
+      labels: {
+        style: {
+          fontSize: "13px",
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: "13px",
+        },
+      },
+      title: {
+        text: "Completed Rides",
       },
     },
     dataLabels: {
       enabled: false,
     },
-    // xaxis: {
-    //   reversed: true,
-    // },
+    tooltip: {
+      theme: "dark",
+      y: {
+        formatter: (val: number) => `${val} rides`,
+      },
+    },
   };
 
   const series = [
     {
+      name: "Rides",
       data,
     },
   ];
+
   return <Chart options={options} series={series} type="bar" height={350} />;
 };
 

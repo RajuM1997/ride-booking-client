@@ -65,6 +65,24 @@ export const adminApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getActiveDriver: builder.query({
+      query: () => ({
+        url: "/site-admin/total-active-drivers",
+        method: "GET",
+      }),
+    }),
+    getEachCompletedRideDriver: builder.query({
+      query: () => ({
+        url: "/site-admin/total-complete-ride-driver",
+        method: "GET",
+      }),
+    }),
+    getCompleteRide: builder.query({
+      query: () => ({
+        url: "/site-admin/all-complete-ride",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -78,4 +96,7 @@ export const {
   useAdminUpdateDriverMutation,
   useGetPerMonthRidesCountQuery,
   useGetPerMonthRevenueQuery,
+  useGetActiveDriverQuery,
+  useGetEachCompletedRideDriverQuery,
+  useGetCompleteRideQuery,
 } = adminApi;

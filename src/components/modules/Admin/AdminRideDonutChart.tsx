@@ -1,12 +1,15 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-interface CircularChartProps {
+interface AdminRideDonutChartProps {
   series: number[];
   labels: string[];
 }
 
-const CircularChart: React.FC<CircularChartProps> = ({ series, labels }) => {
+const AdminRideDonutChart: React.FC<AdminRideDonutChartProps> = ({
+  series,
+  labels,
+}) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "donut",
@@ -35,4 +38,4 @@ const CircularChart: React.FC<CircularChartProps> = ({ series, labels }) => {
   return <Chart options={options} series={series} type="donut" height={350} />;
 };
 
-export default CircularChart;
+export default AdminRideDonutChart;

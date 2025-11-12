@@ -79,7 +79,6 @@ const AllUsersTable = () => {
 
     setClearSearch(true);
   };
-  console.log(data);
 
   const handleClearSearch = () => {
     setEmail(undefined);
@@ -193,8 +192,8 @@ const AllUsersTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data?.data?.length > 0 &&
-                data?.data?.map((user: IUser, i: number) => (
+              {data?.data?.rides?.length > 0 &&
+                data?.data?.rides?.map((user: IUser, i: number) => (
                   <TableRow key={user._id}>
                     <TableCell className="font-medium">{i + 1}</TableCell>
                     <TableCell>{user.name}</TableCell>

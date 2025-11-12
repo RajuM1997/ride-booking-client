@@ -106,6 +106,7 @@ const AdminAllRidesTable = () => {
       date: undefined,
     });
   };
+  console.log(riders);
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -159,7 +160,7 @@ const AdminAllRidesTable = () => {
                               <SelectValue placeholder="Select a rider" />
                             </SelectTrigger>
                             <SelectContent>
-                              {riders?.data?.map((rider: IUser) => (
+                              {riders?.data?.riders?.map((rider: IUser) => (
                                 <SelectItem key={rider._id} value={rider._id}>
                                   {rider.name}
                                 </SelectItem>

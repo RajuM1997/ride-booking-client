@@ -24,6 +24,12 @@ const EarningsBarChart: React.FC<EarningsBarChartProps> = ({ data }) => {
     dataLabels: {
       enabled: false,
     },
+    tooltip: {
+      theme: "dark",
+      y: {
+        formatter: (val: number) => `${val} rides`,
+      },
+    },
     // xaxis: {
     //   reversed: true,
     // },

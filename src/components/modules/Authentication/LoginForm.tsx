@@ -34,7 +34,7 @@ export function LoginForm({
     } catch (error: unknown) {
       const err = error as IErrorResponse;
       console.log(error);
-
+      toast.error(err.data.message);
       if (err.data.message === "Your account is not verified") {
         toast.error("Your account is not verified");
         navigate("/verify", { state: data.email });

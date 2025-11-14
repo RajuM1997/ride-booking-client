@@ -91,6 +91,7 @@ const AllUsersTable = () => {
       isActive: "",
     });
   };
+  console.log(data);
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -187,13 +188,12 @@ const AllUsersTable = () => {
                 <TableHead>Delete Status</TableHead>
                 <TableHead>Active Status</TableHead>
                 <TableHead>Verified Status</TableHead>
-
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data?.data?.rides?.length > 0 &&
-                data?.data?.rides?.map((user: IUser, i: number) => (
+              {data?.data?.length > 0 &&
+                data?.data?.map((user: IUser, i: number) => (
                   <TableRow key={user._id}>
                     <TableCell className="font-medium">{i + 1}</TableCell>
                     <TableCell>{user.name}</TableCell>

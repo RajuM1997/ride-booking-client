@@ -55,7 +55,7 @@ const DriverRideHistoryTable = () => {
     defaultValues: {
       pickup: "",
       destination: "",
-      date: new Date(),
+      date: undefined,
     },
   });
   const [date, setDate] = useState<string | undefined>();

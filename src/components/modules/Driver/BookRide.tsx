@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -66,48 +67,60 @@ const BookRide = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data?.length > 0 &&
-            data?.data?.map((ride: IRide, i: number) => (
-              <TableRow key={ride._id}>
-                <TableCell className="font-medium">{i + 1}</TableCell>
-                <TableCell className="capitalize">{ride.destination}</TableCell>
-                <TableCell className="capitalize">{ride.pickup}</TableCell>
-                <TableCell>{ride.fare}</TableCell>
-                <TableCell>
-                  {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
-                </TableCell>
-                <TableCell className="lowercase"> {ride.status}</TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    disabled={ride?.driverRideStatus?.some(
-                      (rideStatus: IDriverStatus) =>
-                        rideStatus.driverId === userData?.data?._id
-                    )}
-                    size={"sm"}
-                    onClick={() => handleRideBooking(ride._id)}
-                  >
-                    Book A Ride
-                  </Button>
-                  <Button
-                    disabled={ride?.driverRideStatus?.some(
-                      (rideStatus: IDriverStatus) =>
-                        rideStatus.driverId === userData?.data?._id
-                    )}
-                    size={"sm"}
-                    className="ml-2 min-w-[140px]"
-                    onClick={() => handleCancelRide(ride._id)}
-                  >
-                    {ride?.driverRideStatus?.some(
-                      (rideStatus: IDriverStatus) =>
-                        rideStatus.driverId === userData?.data?._id
-                    )
-                      ? "All-Ready Cancel"
-                      : "Cancel A Ride"}
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+          {userData?.data?.driver?.isAvailability === "ONLINE" && (
+            <>
+              {data?.data?.length > 0 &&
+                data?.data?.map((ride: IRide, i: number) => (
+                  <TableRow key={ride._id}>
+                    <TableCell className="font-medium">{i + 1}</TableCell>
+                    <TableCell className="capitalize">
+                      {ride.destination}
+                    </TableCell>
+                    <TableCell className="capitalize">{ride.pickup}</TableCell>
+                    <TableCell>{ride.fare}</TableCell>
+                    <TableCell>
+                      {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
+                    </TableCell>
+                    <TableCell className="lowercase"> {ride.status}</TableCell>
+                    <TableCell className="text-right">
+                      <Button
+                        disabled={ride?.driverRideStatus?.some(
+                          (rideStatus: IDriverStatus) =>
+                            rideStatus.driverId === userData?.data?._id
+                        )}
+                        size={"sm"}
+                        onClick={() => handleRideBooking(ride._id)}
+                      >
+                        Book A Ride
+                      </Button>
+                      <Button
+                        disabled={ride?.driverRideStatus?.some(
+                          (rideStatus: IDriverStatus) =>
+                            rideStatus.driverId === userData?.data?._id
+                        )}
+                        size={"sm"}
+                        className="ml-2 min-w-[140px]"
+                        onClick={() => handleCancelRide(ride._id)}
+                      >
+                        {ride?.driverRideStatus?.some(
+                          (rideStatus: IDriverStatus) =>
+                            rideStatus.driverId === userData?.data?._id
+                        )
+                          ? "All-Ready Cancel"
+                          : "Cancel A Ride"}
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </>
+          )}
         </TableBody>
+        {userData?.data?.driver?.isAvailability === "OFFLINE" && (
+          <TableCaption>
+            You are currently Offline. To accept ride requests, switch your
+            status to Online.
+          </TableCaption>
+        )}
       </Table>
     </div>
   );

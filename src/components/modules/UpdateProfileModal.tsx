@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -122,63 +121,67 @@ const UpdateProfileModal = ({ profileData }: Props) => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="licenseNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>License Number</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Khulna"
-                        type="#274765FGS44YE"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription className="sr-only">
-                      This is your public license number.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="vehicleType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Vehicle Type</FormLabel>
-                    <FormControl>
-                      <Input placeholder="30" type="auto" {...field} />
-                    </FormControl>
-                    <FormDescription className="sr-only">
-                      This is your public vehicle type.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="vehicleNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Vehicle Number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="30" type="DHAKA, 36A" {...field} />
-                    </FormControl>
-                    <FormDescription className="sr-only">
-                      This is your public vehicle number.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
+              {profileData.role === "DRIVER" && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="licenseNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>License Number</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Khulna"
+                            type="#274765FGS44YE"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription className="sr-only">
+                          This is your public license number.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="vehicleType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Vehicle Type</FormLabel>
+                        <FormControl>
+                          <Input placeholder="30" type="auto" {...field} />
+                        </FormControl>
+                        <FormDescription className="sr-only">
+                          This is your public vehicle type.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="vehicleNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Vehicle Number</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="30"
+                            type="DHAKA, 36A"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription className="sr-only">
+                          This is your public vehicle number.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
+              )}
               <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
                 <Button form="updateProfile" type="submit" className="w-full">
                   Update
                 </Button>

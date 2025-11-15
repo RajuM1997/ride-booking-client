@@ -12,6 +12,13 @@ import Unauthorized from "@/pages/Unauthorized";
 import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import type { TRole } from "@/types";
+import AboutUs from "@/pages/AboutUs";
+import Features from "@/pages/Features";
+import Contact from "@/pages/Contact";
+import FAQ from "@/pages/FAQ";
+import { lazy } from "react";
+
+const RiderDetails = lazy(() => import("@/pages/Rider/RiderDetails"));
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +28,26 @@ export const router = createBrowserRouter([
       {
         Component: HomePage,
         index: true,
+      },
+      {
+        Component: RiderDetails,
+        path: "/ride-details/:id",
+      },
+      {
+        Component: AboutUs,
+        path: "/about-us",
+      },
+      {
+        Component: Features,
+        path: "/features",
+      },
+      {
+        Component: Contact,
+        path: "/contact",
+      },
+      {
+        Component: FAQ,
+        path: "/faq",
       },
     ],
   },

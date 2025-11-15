@@ -5,10 +5,15 @@ export interface IRide {
   status: string;
   fare: number;
   createdAt: string;
+  paymentMethod: string;
   driver: IDriver;
   driverRideStatus: IDriverStatus[];
+  currentStatus: ICurrentStatus[];
 }
-
+export interface ICurrentStatus {
+  status: string;
+  currentTimeTamp: string;
+}
 export interface IDriver {
   name: string;
   phone: string;

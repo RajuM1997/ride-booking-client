@@ -1,73 +1,87 @@
 export default function HowItWorkSection() {
   return (
-    <div className="">
-      <h2 className="py-10 text-2xl font-semibold">How It Work</h2>
+    <div className=" py-10">
+      <div className="lg:px-40">
+        <h2 className="py-5 text-2xl font-semibold text-center">
+          How It Works
+        </h2>
+        <p className="text-base text-center text-gray-600 dark:text-gray-300">
+          Booking a ride has never been easier. Follow these simple steps to
+          request, track, and complete your ride seamlessly — from start to
+          finish, we make every journey smooth, safe, and reliable.
+        </p>
+      </div>
+
       <ol className="relative space-y-8 before:absolute before:top-0 before:left-1/2 before:h-full before:w-0.5 before:-translate-x-1/2 before:rounded-full before:bg-gray-200 dark:before:bg-gray-700 my-10">
+        {/* Step 1 */}
         <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">
-          <div className="relative flex items-start gap-4 group-odd:flex-row-reverse group-odd:text-right group-even:order-last">
-            <span className="size-3 shrink-0 rounded-full bg-blue-600"></span>
+          <div className="relative flex items-start gap-1 md:gap-4 group-odd:flex-row-reverse md:group-odd:text-right group-even:order-last">
+            <span className="w-5 h-5 shrink-0 rounded-full bg-[#70AE00]"></span>
 
-            <div className="-mt-2 bg-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 p-5 rounded-md">
+            <div className="-mt-2 max-w-[400px] bg-white/20 dark:bg-gray-800/20 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 dark:border-gray-700/20 p-2 md:p-5 rounded-md">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                Kickoff
+                Request a Ride
               </h3>
-
               <p className="mt-0.5 text-sm text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                officiis tempora ipsum adipisci tenetur sunt quae exercitationem
-                sed pariatur porro!
+                Enter your pickup and destination, select ride type, and submit
+                your request. Our system finds the nearest drivers instantly.
               </p>
             </div>
           </div>
-
           <div aria-hidden="true"></div>
         </li>
 
+        {/* Step 2 */}
         <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">
-          <div className="relative flex items-start gap-4 group-odd:flex-row-reverse group-odd:text-right group-even:order-last">
-            <span className="size-3 shrink-0 rounded-full bg-blue-600"></span>
+          <div className="relative flex items-start gap-1 md:gap-4 group-odd:flex-row-reverse md:group-odd:text-right group-even:order-last">
+            <span className="w-5 h-5 shrink-0 rounded-full bg-[#70AE00]"></span>
 
-            <div className="-mt-2 bg-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 p-5 rounded-md">
-              <time className="text-xs/none font-medium text-gray-700 dark:text-gray-200">
-                5/03/2025
-              </time>
-
+            <div className="-mt-2 max-w-[400px] bg-white/20 dark:bg-gray-800/20 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 dark:border-gray-700/20 p-2 md:p-5 rounded-md">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                First Milestone
+                Driver Accepts
               </h3>
-
               <p className="mt-0.5 text-sm text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                officiis tempora ipsum adipisci tenetur sunt quae exercitationem
-                sed pariatur porro!
+                Nearby drivers receive your ride request. Once a driver accepts,
+                you get instant confirmation and driver details.
               </p>
             </div>
           </div>
-
           <div aria-hidden="true"></div>
         </li>
 
+        {/* Step 3 */}
         <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">
-          <div className="relative flex items-start gap-4 group-odd:flex-row-reverse group-odd:text-right group-even:order-last">
-            <span className="size-3 shrink-0 rounded-full bg-blue-600"></span>
+          <div className="relative flex items-start gap-2 md:gap-4 group-odd:flex-row-reverse lg:group-odd:text-right group-even:order-last">
+            <span className="w-5 h-5 shrink-0 rounded-full bg-[#70AE00]"></span>
 
-            <div className="-mt-2 bg-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 p-5 rounded-md">
-              <time className="text-xs/none font-medium text-gray-700 dark:text-gray-200">
-                24/04/2025
-              </time>
-
+            <div className="-mt-2 max-w-[400px] bg-white/20 dark:bg-gray-800/20 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 dark:border-gray-700/20 p-2 md:p-5 rounded-md">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                Launch
+                Ride in Progress
               </h3>
-
               <p className="mt-0.5 text-sm text-gray-700 dark:text-gray-200">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                officiis tempora ipsum adipisci tenetur sunt quae exercitationem
-                sed pariatur porro!
+                Track your driver in real-time on the map. Enjoy a safe and
+                comfortable ride while knowing exactly when you’ll arrive.
               </p>
             </div>
           </div>
+          <div aria-hidden="true"></div>
+        </li>
 
+        {/* Step 4 */}
+        <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">
+          <div className="relative flex items-start gap-2 md:gap-4 group-odd:flex-row-reverse md:group-odd:text-right group-even:order-last">
+            <span className="w-5 h-5 shrink-0 rounded-full bg-[#70AE00]"></span>
+
+            <div className="-mt-2 max-w-[400px] bg-white/20 dark:bg-gray-800/20 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/20 dark:border-gray-700/20 p-2 md:p-5 rounded-md">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                Payment & Review
+              </h3>
+              <p className="mt-0.5 text-sm text-gray-700 dark:text-gray-200">
+                After reaching your destination, pay securely via the app and
+                leave a review. Your feedback helps us improve every ride.
+              </p>
+            </div>
+          </div>
           <div aria-hidden="true"></div>
         </li>
       </ol>

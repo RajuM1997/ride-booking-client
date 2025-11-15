@@ -1,9 +1,13 @@
-import BookARide from "@/pages/Driver/BookARide";
-import DriverActiveRide from "@/pages/Driver/DriverActiveRide";
-import DriverAnalytics from "@/pages/Driver/DriverAnalytics";
-import DriverRideHistory from "@/pages/Driver/DriverRideHistory";
-import Profile from "@/pages/Profile";
 import type { ISidebarItem } from "@/types";
+import { lazy } from "react";
+
+const DriverAnalytics = lazy(() => import("@/pages/Driver/DriverAnalytics"));
+const BookARide = lazy(() => import("@/pages/Driver/BookARide"));
+const DriverActiveRide = lazy(() => import("@/pages/Driver/DriverActiveRide"));
+const DriverRideHistory = lazy(
+  () => import("@/pages/Driver/DriverRideHistory")
+);
+const Profile = lazy(() => import("@/pages/Profile"));
 
 export const driverSidebarItems: ISidebarItem[] = [
   {

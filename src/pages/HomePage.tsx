@@ -8,10 +8,12 @@ export default function HomePage() {
   return (
     <section>
       <HeroSection />
-      <HowItWorkSection />
-      <OurServiceService />
-      <OurOfferSection />
-      <TestimonialSection />
+      <div className="container mx-auto">
+        <HowItWorkSection />
+        <OurServiceService />
+        <OurOfferSection />
+        <TestimonialSection />
+      </div>
     </section>
   );
 }

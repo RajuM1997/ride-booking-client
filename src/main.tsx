@@ -7,6 +7,10 @@ import { ThemeProvider } from "./providers/theme.providers.tsx";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./redux/store.ts";
 import { Toaster } from "./components/ui/sonner.tsx";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

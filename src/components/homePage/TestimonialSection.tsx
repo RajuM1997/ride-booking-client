@@ -1,99 +1,115 @@
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import user1 from "@/assets/user-1.jpeg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Scrollbar, A11y, Autoplay } from "swiper/modules";
+import { StarIcon } from "lucide-react";
+
 interface IUserFeedback {
   username: string;
-  image: string;
-  newUser: string;
   feedback: string;
 }
 const userFeedbacks: IUserFeedback[] = [
   {
-    image: "/images/users/user1.jpg",
     username: "Ayesha Rahman",
-    newUser: "New Member",
     feedback:
-      "Just joined and already loving the experience! The rides are smooth, drivers are friendly, and the app is super easy to use.",
+      "Just joined recently and I’m genuinely impressed! The rides are smooth, drivers are polite, and the entire booking process is effortless. The real-time tracking makes the experience even more reliable and stress-free.",
   },
   {
-    image: "/images/users/user2.jpg",
     username: "Samiul Hasan",
-    newUser: "Gold Member",
     feedback:
-      "As a regular rider, I really appreciate the loyalty rewards. Priority booking and special discounts make every trip worth it.",
+      "I take rides almost every day and the service never disappoints. The pricing is fair, the cars are clean, and the drivers maintain professionalism. I really enjoy how the app prioritizes frequent riders with helpful perks.",
   },
   {
-    image: "/images/users/user3.jpg",
     username: "Nadia Akter",
-    newUser: "Silver Member",
     feedback:
-      "I use the app almost daily for my commute. The service is consistent, affordable, and always on time. Highly recommended!",
+      "The app has become a big part of my daily routine. Everything from booking to arrival is well-organized. I love how quickly drivers respond and how consistently on time they are. Highly recommended for daily commuters!",
   },
   {
-    image: "/images/users/user4.jpg",
     username: "Rafid Chowdhury",
-    newUser: "Platinum Member",
     feedback:
-      "Outstanding service! The premium support and faster pickups make my business trips super convenient. Best ride-share app so far!",
+      "Perfect for business travel! The pickup times are faster, and the entire ride experience feels premium. I rely on this service for meetings across the city, and it consistently saves me time and hassle.",
   },
   {
-    image: "/images/users/user5.jpg",
     username: "Meherun Nesa",
-    newUser: "Bronze Member",
     feedback:
-      "The offers and referral bonuses are great! I’ve saved quite a bit on my daily rides thanks to their loyalty program.",
+      "I appreciate how affordable the service is, especially with regular discounts and promotional offers. The referral rewards helped me save even more. It’s a great platform for both occasional and regular riders.",
+  },
+  {
+    username: "Zihan Mahmud",
+    feedback:
+      "Booking a ride takes just a few taps, and the response time is amazing. The drivers are knowledgeable about routes, which makes every trip smoother and quicker. It’s truly a dependable ride-sharing service.",
+  },
+  {
+    username: "Farhana Ibrahim",
+    feedback:
+      "I feel safe and comfortable every time I ride. The customer support is responsive, and drivers follow safety protocols. The overall experience feels polished and user-focused. I’m definitely sticking with this app!",
   },
 ];
 
 export function TestimonialSection() {
   return (
     <section className="pb-10">
-      <h2 className="py-10 text-2xl font-semibold">Our Customer Say's</h2>
-      <Carousel
-        opts={{
-          align: "start",
+      <div className="py-10 lg:px-40 text-center">
+        <h2 className="py-5 text-2xl font-semibold">Our Customer Say's</h2>
+        <p className="">
+          Hear from our riders! We value every feedback and strive to make every
+          journey safe, comfortable, and enjoyable. Here’s what our customers
+          have to say about their experiences with us.
+        </p>
+      </div>
+      <Swiper
+        modules={[Pagination, Scrollbar, A11y, Autoplay]}
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
         }}
-        className=" w-full"
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+
+          768: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+
+          1024: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+        }}
       >
-        <CarouselContent>
-          {userFeedbacks.map((item, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 ">
-              <div className="p-1">
-                <Card className="py-0">
-                  <CardContent className="flex flex-col justify-center aspect-square  p-6">
-                    <div className="flex gap-6 items-center ">
-                      <img
-                        src={user1}
-                        alt=""
-                        className="w-14 h-14 rounded-full object-cover"
-                      />
-                      <div>
-                        <span className="text-1xl font-semibold">
-                          {item.username}
-                        </span>
-                        <p className=" text-sm">
-                          <i>{item.newUser}</i>
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pt-6">
-                      <i>" {item.feedback} "</i>
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+        {userFeedbacks.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="p-1">
+              <Card className="py-0 ">
+                <CardContent className="flex flex-col h-[300px] justify-center p-6">
+                  <div className="flex justify-center gap-2">
+                    <StarIcon size={22} className="text-red-500" />
+                    <StarIcon size={22} className="text-red-500" />
+                    <StarIcon size={22} className="text-red-500" />
+                    <StarIcon size={22} className="text-red-500" />
+                    <StarIcon size={22} className="text-red-500" />
+                  </div>
+                  <p className="pt-6 text-center lg:px-25">
+                    <i>" {item.feedback} "</i>
+                  </p>
+
+                  <div className="text-right pt-5 lg:px-25">
+                    <span className="text-1xl  font-semibold">
+                      _ {item.username}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </SwiperSlide>
+        ))}
+        {/* <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide> */}
+      </Swiper>
     </section>
   );
 }

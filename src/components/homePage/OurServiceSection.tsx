@@ -1,10 +1,8 @@
 import { Building2, Car, Check, Plane } from "lucide-react";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../ui/card";
@@ -12,10 +10,17 @@ import {
 export default function OurServiceService() {
   return (
     <div>
-      <h2 className="py-10 text-2xl font-semibold">Our Services</h2>
-      <div className="grid grid-cols-3 gap-4">
-        <Card>
-          <CardHeader>
+      <div className="lg:px-40 py-10 text-center">
+        <h2 className="py-5 text-2xl font-semibold">Our Services</h2>
+        <p className="text-center">
+          Whether you need a quick city ride, premium corporate travel, or a
+          reliable airport transfer, we’ve got you covered with safe,
+          comfortable, and convenient transportation options.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <Card className="pt-0 bg-linear-to-r from-blue-200/10 via-blue-100/10 to-blue-200/10 backdrop-blur-sm">
+          <CardHeader className="pt-2">
             <span className=" w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Car />
             </span>
@@ -45,12 +50,10 @@ export default function OurServiceService() {
               <span className="text-base">Multiple Payment Options</span>
             </p>
           </CardContent>
-          <CardFooter>
-            <Button>Learn More</Button>
-          </CardFooter>
         </Card>
-        <Card>
-          <CardHeader>
+
+        <Card className="pt-0 bg-linear-to-r from-green-200/10 via-green-100/10 to-green-200/10 backdrop-blur-sm">
+          <CardHeader className="pt-2">
             <span className=" w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Building2 />
             </span>
@@ -80,13 +83,11 @@ export default function OurServiceService() {
               <span className="text-base">Priority Booking</span>
             </p>
           </CardContent>
-          <CardFooter>
-            <Button>Learn More</Button>
-          </CardFooter>
         </Card>
-        <Card>
-          <CardHeader>
-            <span className=" w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
+
+        <Card className="pt-0 bg-linear-to-r from-purple-200/10 via-purple-100/10 to-purple-200/10 backdrop-blur-sm">
+          <CardHeader className="pt-2">
+            <span className="pt-2 w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Plane />
             </span>
             <CardTitle>Airport Transfer</CardTitle>
@@ -115,9 +116,6 @@ export default function OurServiceService() {
               <span className="text-base">Luggage Assistance</span>
             </p>
           </CardContent>
-          <CardFooter>
-            <Button>Learn More</Button>
-          </CardFooter>
         </Card>
       </div>
     </div>

@@ -1,10 +1,10 @@
-import AdminAllRides from "@/pages/Admin/AdminAllRides";
-import AllUser from "@/pages/Admin/AllUser";
-import Profile from "@/pages/Profile";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
 const Analytics = lazy(() => import("@/pages/Admin/Analytics"));
+const AdminAllRides = lazy(() => import("@/pages/Admin/AdminAllRides"));
+const AllUser = lazy(() => import("@/pages/Admin/AllUser"));
+const Profile = lazy(() => import("@/pages/Profile"));
 
 export const adminSidebarItems: ISidebarItem[] = [
   {

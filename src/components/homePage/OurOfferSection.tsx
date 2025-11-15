@@ -4,10 +4,16 @@ import img2 from "@/assets/offer2.jpg";
 
 export default function OurOfferSection() {
   return (
-    <>
-      <h2 className="py-10 text-2xl font-semibold">Our Offer</h2>
-
-      <div className="grid grid-cols-2 gap-5">
+    <div>
+      <div className="lg:px-40 py-10 text-center">
+        <h2 className="py-5 text-2xl font-semibold">Our Offer</h2>
+        <p className="text-center">
+          Check out our latest promotions and referral rewards! Whether you’re a
+          new rider or inviting friends, we make every ride more rewarding and
+          enjoyable.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <Card className="pt-0">
           <img
             src={img1}
@@ -40,6 +46,6 @@ export default function OurOfferSection() {
           </CardHeader>
         </Card>
       </div>
-    </>
+    </div>
   );
 }

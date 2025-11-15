@@ -24,7 +24,6 @@ import { toast } from "sonner";
 const DriverActiveRideTable = () => {
   const { data } = useGetDriverActiveRideQuery("ACCEPTED");
   const [changeRideStatus] = useChangeRideStatusMutation();
-  console.log(data);
 
   const handleStatus = async (status: string, id: string) => {
     const data = {

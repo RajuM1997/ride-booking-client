@@ -23,8 +23,10 @@ import { ModeToggle } from "./ModeTooggler";
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
-  { href: "/about", label: "About", role: "PUBLIC" },
-  { href: "/tours", label: "Tour", role: "PUBLIC" },
+  { href: "/about-us", label: "About Us", role: "PUBLIC" },
+  { href: "/features", label: "Features", role: "PUBLIC" },
+  { href: "/contact", label: "Contact", role: "PUBLIC" },
+  { href: "/faq", label: "FAQ", role: "PUBLIC" },
   { href: "/admin", label: "Dashboard", role: role.admin },
   { href: "/driver", label: "Dashboard", role: role.driver },
   { href: "/rider", label: "Dashboard", role: role.rider },
@@ -45,7 +47,7 @@ export default function Navbar() {
     <header className="border-b">
       <div className="flex h-16 items-center justify-between gap-4 container mx-auto px-4 ">
         {/* Left side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center  gap-2">
           {/* Mobile menu trigger */}
           <Popover>
             <PopoverTrigger asChild>
@@ -113,37 +115,37 @@ export default function Navbar() {
             </PopoverContent>
           </Popover>
           {/* Main nav */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center w-full justify-end gap-6">
             <a href="#" className="text-primary hover:text-primary/90">
-              <h3>Rider</h3>
+              <h3 className="text-lg font-bold">TrustTrip</h3>
             </a>
-            {/* Navigation menu */}
-            <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-2">
-                {navigationLinks.map((link, index) => (
-                  <div key={index + "b"}>
-                    {link.role === "PUBLIC" && (
-                      <NavigationMenuItem key={index + "c"} className="w-full">
-                        <NavigationMenuLink asChild className="py-1.5">
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                    {link.role === data?.data?.role && (
-                      <NavigationMenuItem key={index + "d"} className="w-full">
-                        <NavigationMenuLink asChild className="py-1.5">
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                  </div>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
           </div>
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {/* Navigation menu */}
+          <NavigationMenu className="max-md:hidden ">
+            <NavigationMenuList className="gap-2 w-full ml-auto">
+              {navigationLinks.map((link, index) => (
+                <div key={index + "b"}>
+                  {link.role === "PUBLIC" && (
+                    <NavigationMenuItem key={index + "c"} className="w-full">
+                      <NavigationMenuLink asChild className="py-1.5">
+                        <Link to={link.href}>{link.label}</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  )}
+                  {link.role === data?.data?.role && (
+                    <NavigationMenuItem key={index + "d"} className="w-full">
+                      <NavigationMenuLink asChild className="py-1.5">
+                        <Link to={link.href}>{link.label}</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  )}
+                </div>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
           <ModeToggle />
           {data?.data?.email && (
             <Button onClick={handleLogout} className="text-sm">

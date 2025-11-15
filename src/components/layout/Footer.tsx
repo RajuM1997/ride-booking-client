@@ -1,16 +1,72 @@
+import { Link } from "react-router";
+import SubscribeInput from "../ui/SubscribeInput";
+
 const Footer = () => {
   return (
-    <div>
-      <footer className="bg-white dark:bg-gray-900">
-        <div className="container mx-auto pt-6">
-          <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
-            <div className="mx-auto max-w-sm lg:max-w-none">
-              <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg dark:text-gray-400">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Praesentium natus quod eveniet aut perferendis distinctio iusto
-                repudiandae, provident velit earum?
-              </p>
+    <footer className="pb-5  border-t">
+      <div className="container px-5 mx-auto pt-6">
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
+          <div className="mx-auto max-w-sm lg:max-w-none">
+            <h4 className="text-lg font-bold">TrustTrip</h4>
+            <p className="mt-4">
+              TrustTrip is your reliable ride-sharing partner, offering safe,
+              convenient, and affordable rides for every journey. From city
+              commutes to airport transfers, we connect you with professional
+              drivers to make every ride seamless. Ride with confidence, ride
+              with TrustTrip.
+            </p>
+          </div>
 
+          <div className=" grid-cols-12 gap-8 hidden md:grid lg:text-left">
+            <div className="col-span-12 lg:col-span-5">
+              <strong className="font-medium text-gray-900 dark:text-white">
+                Quick Links
+              </strong>
+
+              <ul className="mt-6 space-y-1">
+                <li>
+                  <Link
+                    className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
+                    to="/about-us"
+                  >
+                    About Us
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
+                    to="/features"
+                  >
+                    Features
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
+                    to="/contact"
+                  >
+                    Contact
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
+                    to="/faq"
+                  >
+                    FAQ
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="col-span-12 lg:col-span-7">
+              <strong className="font-medium ">Follow Us</strong>
+              <div className=" pt-5 w-[300px] mx-auto lg:w-full">
+                <SubscribeInput />
+              </div>
               <div className="mt-6 flex justify-center gap-4 lg:justify-start">
                 <a
                   className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
@@ -119,160 +175,16 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-
-            <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
-              <div>
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  {" "}
-                  Services{" "}
-                </strong>
-
-                <ul className="mt-6 space-y-1">
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Marketing
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Graphic Design
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      App Development
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Web Development
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  {" "}
-                  About{" "}
-                </strong>
-
-                <ul className="mt-6 space-y-1">
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      About
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Careers
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      History
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Our Team
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <strong className="font-medium text-gray-900 dark:text-white">
-                  {" "}
-                  Support{" "}
-                </strong>
-
-                <ul className="mt-6 space-y-1">
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      FAQs
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Contact
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      className="text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                      href="#"
-                    >
-                      Live Chat
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 border-t border-gray-100 pt-8 dark:border-gray-800">
-            <p className="text-center text-xs/relaxed text-gray-500 dark:text-gray-400">
-              © Company 2022. All rights reserved.
-              <br />
-              Created with
-              <a
-                href="#"
-                className="text-gray-700 underline transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-              >
-                Laravel
-              </a>
-              and
-              <a
-                href="#"
-                className="text-gray-700 underline transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-              >
-                Laravel Livewire
-              </a>
-              .
-            </p>
           </div>
         </div>
-      </footer>
-    </div>
+
+        <div className="mt-16 border-t  border-gray-100 pt-8 dark:border-gray-800">
+          <p className="text-center text-xs/relaxed text-gray-500 dark:text-gray-400">
+            © Company 2022. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

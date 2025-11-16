@@ -18,10 +18,12 @@ import type { IErrorResponse, IRide } from "@/types";
 import type { IDriverStatus } from "@/types/ride.type";
 import { format } from "date-fns";
 import { toast } from "sonner";
+import TableLoader from "../TableLoader";
 
 const BookRide = () => {
-  const { data } = useGetAllRideQuery(undefined);
-  const { data: userData } = useUserInfoQuery(undefined);
+  const { data, isLoading: rideLoading } = useGetAllRideQuery(undefined);
+  const { data: userData, isLoading: userLoading } =
+    useUserInfoQuery(undefined);
   const [cancelRide] = useDriverCancelRideMutation();
   const [bookingRide] = useDriverRideBookingMutation();
 
@@ -51,7 +53,9 @@ const BookRide = () => {
       toast.error(err?.data?.message, { id: toastId });
     }
   };
-
+  if (rideLoading || userLoading) {
+    return <TableLoader />;
+  }
   return (
     <div className="w-full max-w-7xl mx-auto">
       <Table>
@@ -61,6 +65,7 @@ const BookRide = () => {
             <TableHead>Destination</TableHead>
             <TableHead>Pickup</TableHead>
             <TableHead>Fare</TableHead>
+            <TableHead>Payment Method</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -78,6 +83,7 @@ const BookRide = () => {
                     </TableCell>
                     <TableCell className="capitalize">{ride.pickup}</TableCell>
                     <TableCell>{ride.fare}</TableCell>
+                    <TableCell>{ride?.paymentMethod}</TableCell>
                     <TableCell>
                       {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
                     </TableCell>

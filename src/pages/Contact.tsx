@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
+import { useCreateUserQueryMutation } from "@/redux/features/user/user.api";
+import type { IErrorResponse } from "@/types";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -32,17 +34,26 @@ export default function Contact() {
       message: "",
     },
   });
+  const [createUserQuery] = useCreateUserQueryMutation();
 
   const onSubmit = async (data: ContactFormData) => {
-    console.log("Form Submitted:", data);
-
-    await new Promise((r) => setTimeout(r, 1000));
-    toast.success("Your message has been sent successfully!");
-    form.reset();
+    const toastId = toast.loading("Sending Your Message...");
+    try {
+      const userQuery = await createUserQuery(data).unwrap();
+      if (userQuery.success) {
+        toast.success("Your message has been sent successfully!", {
+          id: toastId,
+        });
+      }
+      form.reset();
+    } catch (error: unknown) {
+      const err = error as IErrorResponse;
+      toast.error(err?.data?.message, { id: toastId });
+    }
   };
 
   return (
-    <div className=" py-16 container mx-auto">
+    <div className=" py-20 container mx-auto">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Contact Us
@@ -62,7 +73,7 @@ export default function Contact() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="pb-1">Pickup</FormLabel>
+                <FormLabel className="pb-1">Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Your Name" {...field} />
                 </FormControl>

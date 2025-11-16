@@ -41,6 +41,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import TableLoader from "../TableLoader";
 
 const searchSchema = z.object({
   pickup: z.string().optional(),
@@ -62,7 +63,7 @@ const DriverRideHistoryTable = () => {
   const [pickup, setPickup] = useState<string | undefined>();
   const [destination, setDestination] = useState<string | undefined>(undefined);
   const [clearSearch, setClearSearch] = useState(false);
-  const { data } = useGetDriverRideQuery({
+  const { data, isLoading } = useGetDriverRideQuery({
     page: currentPage,
     limit: 1,
     pickup,
@@ -91,7 +92,9 @@ const DriverRideHistoryTable = () => {
     setClearSearch(false);
     form.reset();
   };
-
+  if (isLoading) {
+    return <TableLoader />;
+  }
   const totalPage = data?.meta?.totalPage || 1;
 
   return (
@@ -196,6 +199,7 @@ const DriverRideHistoryTable = () => {
             <TableHead>Pickup</TableHead>
             <TableHead>Fare</TableHead>
             <TableHead>Date</TableHead>
+            <TableHead>Payment Method</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
@@ -206,9 +210,13 @@ const DriverRideHistoryTable = () => {
                 <TableCell className="font-medium">{i + 1}</TableCell>
                 <TableCell className="capitalize">{ride.destination}</TableCell>
                 <TableCell className="capitalize">{ride.pickup}</TableCell>
-                <TableCell>{ride.fare}</TableCell>
+                <TableCell>৳{ride.fare}</TableCell>
                 <TableCell>
                   {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
+                </TableCell>
+                <TableCell className="">
+                  {" "}
+                  {ride?.paymentMethod || "Na"}
                 </TableCell>
                 <TableCell className="lowercase"> {ride.status}</TableCell>
               </TableRow>

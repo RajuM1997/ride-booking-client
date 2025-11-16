@@ -43,13 +43,13 @@ export default function FAQ() {
   );
 
   return (
-    <div className=" py-16 container mx-auto">
+    <div className=" py-20 container mx-auto">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Frequently Asked Questions
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Find answers to the most common questions about TrustTrip.
+          Find answers to the most common questions about GoTogether.
         </p>
         <input
           type="text"

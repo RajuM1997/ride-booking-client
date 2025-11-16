@@ -41,10 +41,9 @@ export default function Navbar() {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
-  console.log(data);
 
   return (
-    <header className="border-b">
+    <header className="border-b fixed top-0 z-20 w-full bg-[#ffffffa2] dark:bg-[#09090bad]">
       <div className="flex h-16 items-center justify-between gap-4 container mx-auto px-4 ">
         {/* Left side */}
         <div className="flex items-center  gap-2">
@@ -117,7 +116,7 @@ export default function Navbar() {
           {/* Main nav */}
           <div className="flex items-center w-full justify-end gap-6">
             <a href="#" className="text-primary hover:text-primary/90">
-              <h3 className="text-lg font-bold">TrustTrip</h3>
+              <h3 className="text-lg font-bold">GoTogether</h3>
             </a>
           </div>
         </div>

@@ -9,7 +9,7 @@ import { Car, User, ShieldCheck } from "lucide-react";
 
 export default function Features() {
   return (
-    <div className="py-16 container mx-auto">
+    <div className="py-20 container mx-auto">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
           Features
@@ -22,7 +22,7 @@ export default function Features() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:px-40">
-        <Card className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-md">
+        <Card className="bg-linear-to-r from-blue-200/10 via-blue-100/10 shadow-md to-blue-200/10 backdrop-blur-sm   rounded-md">
           <CardHeader className="text-center">
             <User className="mx-auto mb-4 text-green-500" size={48} />
             <CardTitle>Rider</CardTitle>
@@ -39,7 +39,7 @@ export default function Features() {
             </ul>
           </CardContent>
         </Card>
-        <Card className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-md">
+        <Card className="bg-linear-to-r from-green-200/10 via-green-100/10 to-green-200/10 backdrop-blur-sm shadow-md  rounded-md">
           <CardHeader className="text-center">
             <Car className="mx-auto mb-4 text-green-500" size={48} />
             <CardTitle>Driver</CardTitle>
@@ -56,7 +56,7 @@ export default function Features() {
             </ul>
           </CardContent>
         </Card>
-        <Card className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-md">
+        <Card className="bg-linear-to-r from-purple-200/10 via-purple-100/10 to-purple-200/10 backdrop-blur-sm shadow-md rounded-md">
           <CardHeader className="text-center">
             <ShieldCheck className="mx-auto mb-4 text-green-500" size={48} />
             <CardTitle>Admin</CardTitle>

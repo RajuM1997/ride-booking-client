@@ -42,6 +42,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import TableLoader from "../TableLoader";
 
 const searchSchema = z.object({
   driver: z.string().optional(),
@@ -51,6 +60,8 @@ const searchSchema = z.object({
 });
 
 const AdminAllRidesTable = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -70,6 +81,8 @@ const AdminAllRidesTable = () => {
     rider,
     status,
     createdAt: date,
+    limit: 8,
+    page: currentPage,
   });
   const { data: drivers, isLoading: driverLoading } =
     useGetDriversQuery(undefined);
@@ -106,7 +119,10 @@ const AdminAllRidesTable = () => {
       date: undefined,
     });
   };
-  console.log(riders);
+  if (driverLoading || riderLoading) {
+    return <TableLoader />;
+  }
+  const totalPage = data?.meta?.totalPage || 1;
 
   return (
     <div className="w-full max-w-7xl mx-auto">
@@ -271,30 +287,72 @@ const AdminAllRidesTable = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Serial No</TableHead>
             <TableHead>Destination</TableHead>
             <TableHead>Pickup</TableHead>
             <TableHead>Fare</TableHead>
             <TableHead>Date</TableHead>
+            <TableHead>Payment Method</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data?.data?.length > 0 &&
-            data?.data?.map((ride: IRide, i: number) => (
+            data?.data?.map((ride: IRide) => (
               <TableRow key={ride._id}>
-                <TableCell className="font-medium">{i + 1}</TableCell>
                 <TableCell className="capitalize">{ride.destination}</TableCell>
                 <TableCell className="capitalize">{ride.pickup}</TableCell>
                 <TableCell>{ride.fare}</TableCell>
                 <TableCell>
                   {format(new Date(ride?.createdAt), "yyyy-MM-dd")}
                 </TableCell>
+                <TableCell>{ride?.paymentMethod || "NA"}</TableCell>
                 <TableCell className="lowercase"> {ride.status}</TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
+      {totalPage > 1 && (
+        <div className="flex justify-center mt-4">
+          <div>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                    className={
+                      currentPage === 1
+                        ? "pointer-events-none opacity-50"
+                        : "cursor-pointer"
+                    }
+                  />
+                </PaginationItem>
+                {Array.from({ length: totalPage }, (_, index) => index + 1).map(
+                  (page) => (
+                    <PaginationItem
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      <PaginationLink isActive={currentPage === page}>
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  )
+                )}
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    className={
+                      currentPage === totalPage
+                        ? "pointer-events-none opacity-50"
+                        : "cursor-pointer"
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

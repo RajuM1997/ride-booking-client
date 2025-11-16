@@ -7,17 +7,17 @@ const Footer = () => {
       <div className="container px-5 mx-auto pt-6">
         <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
           <div className="mx-auto max-w-sm lg:max-w-none">
-            <h4 className="text-lg font-bold">TrustTrip</h4>
+            <h4 className="text-lg font-bold">GoTogether</h4>
             <p className="mt-4">
-              TrustTrip is your reliable ride-sharing partner, offering safe,
+              GoTogether is your reliable ride-sharing partner, offering safe,
               convenient, and affordable rides for every journey. From city
               commutes to airport transfers, we connect you with professional
               drivers to make every ride seamless. Ride with confidence, ride
-              with TrustTrip.
+              with GoTogether.
             </p>
           </div>
 
-          <div className=" grid-cols-12 gap-8 hidden md:grid lg:text-left">
+          <div className="grid-cols-12 gap-8 grid lg:text-left">
             <div className="col-span-12 lg:col-span-5">
               <strong className="font-medium text-gray-900 dark:text-white">
                 Quick Links

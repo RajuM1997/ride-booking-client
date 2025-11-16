@@ -48,6 +48,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { z } from "zod";
+import TableLoader from "../TableLoader";
 
 const searchSchema = z.object({
   status: z.string().optional(),
@@ -71,7 +72,7 @@ const MyRideTable = () => {
   const [endFare, setEndFare] = useState<string | undefined>(undefined);
   const [clearSearch, setClearSearch] = useState(false);
 
-  const { data } = useGetMyRideQuery({
+  const { data, isLoading } = useGetMyRideQuery({
     status,
     createdAt: date,
     startFare,
@@ -79,7 +80,6 @@ const MyRideTable = () => {
     limit: 5,
     page: currentPage,
   });
-  console.log({ data });
 
   const handleSearch = async (data: z.infer<typeof searchSchema>) => {
     if (data.date) {
@@ -106,7 +106,9 @@ const MyRideTable = () => {
     setClearSearch(false);
     form.reset();
   };
-
+  if (isLoading) {
+    return <TableLoader />;
+  }
   const totalPage = data?.meta?.total || 1;
   return (
     <div className="w-full max-w-7xl mx-auto">

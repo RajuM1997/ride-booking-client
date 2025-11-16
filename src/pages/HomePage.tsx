@@ -8,8 +8,8 @@ export default function HomePage() {
   return (
     <section>
       <HeroSection />
+      <HowItWorkSection />
       <div className="container mx-auto">
-        <HowItWorkSection />
         <OurServiceService />
         <OurOfferSection />
         <TestimonialSection />

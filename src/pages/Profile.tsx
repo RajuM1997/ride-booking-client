@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import UpdateProfileModal from "@/components/modules/UpdateProfileModal";
 import ChangePassword from "@/components/modules/Authentication/ChangePasswordModal";
+import SkeletonLoader from "@/components/modules/Loader";
 
 const Profile = () => {
-  const { data } = useUserInfoQuery(undefined);
-
+  const { data, isLoading } = useUserInfoQuery(undefined);
+  if (isLoading) {
+    return <SkeletonLoader />;
+  }
   return (
     <div className="w-full h-full ">
       <div className="w-full grid grid-cols-12 mx-auto gap-5">
@@ -34,7 +37,7 @@ const Profile = () => {
               <div className="backdrop-blur-md min-w-[150px] lg:w-full border border-white/10 shadow-xl p-5 rounded-2xl">
                 <p>Total Earning</p>
                 <h3 className="text-2xl pt-2">
-                  ${data?.data?.driver?.totalEarning}
+                  ৳ {data?.data?.driver?.totalEarning}
                 </h3>
               </div>
               <div className="backdrop-blur-md min-w-[150px] lg:w-full border border-white/10 shadow-xl p-6 rounded-2xl">
@@ -52,7 +55,9 @@ const Profile = () => {
         </Card>
 
         <Card className="py-0 gap-0 col-span-7">
-          <CardTitle className="p-5">Driver Info</CardTitle>
+          <CardTitle className="p-5 capitalize">
+            {data?.data?.role} Info
+          </CardTitle>
           {data?.data?.role !== "DRIVER" && (
             <Card className="p-5 my-3 gap-0 mx-5">
               <small className="text-sm font-normal pb-0 my-0">Name</small>

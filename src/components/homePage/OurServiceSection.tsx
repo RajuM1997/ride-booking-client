@@ -24,8 +24,8 @@ export default function OurServiceService() {
             <span className=" w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Car />
             </span>
-            <CardTitle>City Rides</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">City Rides</CardTitle>
+            <CardDescription className="text-base">
               Quick, comfortable rides within the city. Perfect for daily
               commute, meetings, or leisure trips.
             </CardDescription>
@@ -57,8 +57,8 @@ export default function OurServiceService() {
             <span className=" w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Building2 />
             </span>
-            <CardTitle>Business Travel</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">Business Travel</CardTitle>
+            <CardDescription className="text-base">
               Premium transportation solutions for corporate clients with
               priority service and dedicated support.
             </CardDescription>
@@ -90,8 +90,8 @@ export default function OurServiceService() {
             <span className="pt-2 w-10 h-10 flex items-center justify-center border border-foreground rounded-full p-2 mb-5">
               <Plane />
             </span>
-            <CardTitle>Airport Transfer</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">Airport Transfer</CardTitle>
+            <CardDescription className="text-base">
               Reliable airport pickup and drop-off services with flight tracking
               and waiting time included.
             </CardDescription>

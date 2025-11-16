@@ -36,6 +36,9 @@ const registerSchema = z
     confirmPassword: z.string().min(8, {
       error: "Confirm password is too short",
     }),
+    licenseNumber: z.string(),
+    vehicleType: z.string(),
+    vehicleNumber: z.string(),
     address: z.string(),
     phone: z.string(),
   })
@@ -44,7 +47,7 @@ const registerSchema = z
     path: ["confirmPassword"],
   });
 
-export function RegisterForm({
+export function RegisterFormDriver({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -57,6 +60,9 @@ export function RegisterForm({
       email: "",
       password: "",
       confirmPassword: "",
+      licenseNumber: "",
+      vehicleType: "",
+      vehicleNumber: "",
       address: "",
       phone: "",
     },
@@ -67,8 +73,14 @@ export function RegisterForm({
       name: data.name,
       email: data.email,
       password: data.password,
-      phone: data.phone,
       address: data.address,
+      phone: data.phone,
+      driver: {
+        licenseNumber: data.licenseNumber,
+        vehicleType: data.vehicleType,
+        vehicleNumber: data.vehicleNumber,
+        role: "DRIVER",
+      },
     };
     const toastId = toast.loading("Login...");
     try {
@@ -86,12 +98,11 @@ export function RegisterForm({
 
   return (
     <div className={cn("flex flex-col gap-6 lg:px-7", className)} {...props}>
-      <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Create Your Rider Account</h1>
+      <div className="flex flex-col items-center gap-2 py-5 text-center">
+        <h1 className="text-2xl font-bold">Join Our Team of Trusted Drivers</h1>
         <p className="text-sm text-muted-foreground">
-          Enter your details below to sign up and start booking rides with
-          GoTogether. Get real-time tracking, safe trips, and convenient payment
-          options.
+          Register your account to start earning with GoTogether. Enter your
+          details below and become part of our reliable ride-sharing network.
         </p>
       </div>
 
@@ -104,7 +115,7 @@ export function RegisterForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel className="pb-1">Name</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -120,7 +131,7 @@ export function RegisterForm({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="pb-1">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="john.doe@company.com"
@@ -142,7 +153,7 @@ export function RegisterForm({
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="pb-1">Password</FormLabel>
                     <FormControl>
                       <Password {...field} />
                     </FormControl>
@@ -158,7 +169,7 @@ export function RegisterForm({
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel className="pb-1">Confirm Password</FormLabel>
                     <FormControl>
                       <Password {...field} />
                     </FormControl>
@@ -173,17 +184,49 @@ export function RegisterForm({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <FormField
                 control={form.control}
+                name="licenseNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="pb-1">License Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="license number" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">
+                      This is your public display license number.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vehicleType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="pb-1">Vehicle Type</FormLabel>
+                    <FormControl>
+                      <Input placeholder="vehicle type" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">
+                      This is your public display vehicle type.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <FormField
+                control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone</FormLabel>
-
+                    <FormLabel className="pb-1">Phone Number</FormLabel>
                     <FormControl>
                       <Input placeholder="017XXXXXXX" {...field} />
                     </FormControl>
-
                     <FormDescription className="sr-only">
-                      This is your public display phone.
+                      This is your public display phone number.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -194,14 +237,30 @@ export function RegisterForm({
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
-
+                    <FormLabel className="pb-1">Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="Dhaka, Maipur 10" {...field} />
+                      <Input placeholder="Dhaka, Mirpur 10" {...field} />
                     </FormControl>
-
                     <FormDescription className="sr-only">
                       This is your public display address.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
+              <FormField
+                control={form.control}
+                name="vehicleNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="pb-1">Vehicle Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="vehicle number" {...field} />
+                    </FormControl>
+                    <FormDescription className="sr-only">
+                      This is your public display vehicle number.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -214,6 +273,7 @@ export function RegisterForm({
             </Button>
           </form>
         </Form>
+
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
             Or continue with

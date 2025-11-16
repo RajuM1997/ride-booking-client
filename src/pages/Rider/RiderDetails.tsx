@@ -38,11 +38,11 @@ export default function RideDetailsPage() {
   console.log(pickup);
 
   return (
-    <>
+    <section className="py-15">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className=" mx-auto p-6 space-y-6">
+        <div className="mx-auto p-6 space-y-6 ">
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold">Ride Details</h1>
             <Link to="/rider/my-ride">
@@ -176,6 +176,6 @@ export default function RideDetailsPage() {
           )}
         </div>
       )}
-    </>
+    </section>
   );
 }

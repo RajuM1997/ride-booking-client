@@ -21,8 +21,10 @@ export default function OurOfferSection() {
             className="max-h-[300px] object-cover rounded-tl-lg rounded-tr-lg"
           />
           <CardHeader>
-            <CardTitle>Invite Friends, Earn Free Rides!</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">
+              Invite Friends, Earn Free Rides!
+            </CardTitle>
+            <CardDescription className="text-base">
               Share your referral link with friends and get free ride credits
               every time someone takes their first trip. The more you share, the
               more you earn — it’s that simple!
@@ -36,8 +38,10 @@ export default function OurOfferSection() {
             alt=""
           />
           <CardHeader>
-            <CardTitle>Get 50% Off Your First Ride!</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">
+              Get 50% Off Your First Ride!
+            </CardTitle>
+            <CardDescription className="text-base">
               New to our platform? Enjoy your very first ride with a 50%
               discount. Just sign up, book your ride, and experience comfort and
               convenience at half the price. Use code FIRST50 to claim your

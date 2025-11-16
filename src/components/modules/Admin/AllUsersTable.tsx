@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/select";
 import AdminUserActivityUpdate from "./AdminUserActivityUpdateModel";
 import AdminDriverUpdatedModel from "./AdminDriverUpdateModel";
+import TableLoader from "../TableLoader";
 
 const searchSchema = z.object({
   email: z.string().optional(),
@@ -55,7 +56,7 @@ const AllUsersTable = () => {
   const [name, setName] = useState<string | undefined>();
   const [isActive, setIsActive] = useState<string | undefined>();
   const [clearSearch, setClearSearch] = useState(false);
-  const { data } = useGetAllUserQuery({
+  const { data, isLoading } = useGetAllUserQuery({
     role: activeTab,
     email,
     name,
@@ -91,7 +92,9 @@ const AllUsersTable = () => {
       isActive: "",
     });
   };
-  console.log(data);
+  if (isLoading) {
+    return <TableLoader />;
+  }
 
   return (
     <div className="w-full max-w-7xl mx-auto">

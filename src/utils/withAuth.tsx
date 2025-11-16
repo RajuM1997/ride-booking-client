@@ -1,3 +1,4 @@
+import DashboardSkeleton from "@/components/modules/DashboardLoader";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import type { TRole } from "@/types";
 import type { ComponentType } from "react";
@@ -7,7 +8,7 @@ export const withAuth = (Component: ComponentType, requiredRole?: TRole) => {
   return function AuthWrapper() {
     const { data, isLoading } = useUserInfoQuery(undefined);
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <DashboardSkeleton />;
     }
     if (!data?.data?.email && !isLoading) {
       return <Navigate to={"/login"} />;

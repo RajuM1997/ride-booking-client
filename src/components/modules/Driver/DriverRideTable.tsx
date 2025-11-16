@@ -9,10 +9,13 @@ import {
 import { useGetDriverRideQuery } from "@/redux/features/driver/driver.api";
 import type { IRide } from "@/types";
 import { format } from "date-fns";
+import TableLoader from "../TableLoader";
 
 const DriverRideTable = () => {
-  const { data } = useGetDriverRideQuery(undefined);
-
+  const { data, isLoading } = useGetDriverRideQuery(undefined);
+  if (isLoading) {
+    return <TableLoader />;
+  }
   return (
     <div className="w-full max-w-7xl mx-auto">
       <Table>

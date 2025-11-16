@@ -1,6 +1,7 @@
 import AdminRideDonutChart from "@/components/modules/Admin/AdminRideDonutChart";
 import AdminRideChart from "@/components/modules/Admin/AdminRidesChart";
 import AdminTotalRevenueAreaChart from "@/components/modules/Admin/AdminTotalRevenueAreaChart";
+import ChartLoader from "@/components/modules/ChartLoader";
 import { Card } from "@/components/ui/card";
 import {
   useGetActiveDriverQuery,
@@ -70,7 +71,15 @@ const Analytics = () => {
         y: eachRide.completedRides,
       })
     ) || [];
-
+  if (
+    rideCountLoading ||
+    revenueLoading ||
+    activeDriverLoading ||
+    completeRideLoading ||
+    allRidersCountLoading
+  ) {
+    return <ChartLoader />;
+  }
   return (
     <div>
       <div className="grid grid-cols-12 gap-5 py-5">

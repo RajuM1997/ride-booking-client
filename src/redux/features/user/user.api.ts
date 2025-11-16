@@ -17,7 +17,18 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["USER"],
     }),
+    createUserQuery: builder.mutation({
+      query: (data) => ({
+        url: "/user-query/create-query",
+        method: "POST",
+        data: data,
+      }),
+    }),
   }),
 });
 
-export const { useUpdateProfileMutation, useUserInfoQuery } = authApi;
+export const {
+  useUpdateProfileMutation,
+  useUserInfoQuery,
+  useCreateUserQueryMutation,
+} = authApi;

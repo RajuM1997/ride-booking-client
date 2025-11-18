@@ -284,7 +284,7 @@ const AdminAllRidesTable = () => {
         </Form>
       </Card>
 
-      <Table>
+      <Table className="min-h-[60vh]">
         <TableHeader>
           <TableRow>
             <TableHead>Destination</TableHead>

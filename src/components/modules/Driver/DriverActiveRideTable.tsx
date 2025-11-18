@@ -63,7 +63,7 @@ const DriverActiveRideTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data?.length &&
+          {data?.data?.length > 0 &&
             data?.data?.map((ride: IRide, i: number) => (
               <TableRow key={ride._id}>
                 <TableCell className="font-medium">{i + 1}</TableCell>

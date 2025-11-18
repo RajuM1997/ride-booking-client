@@ -73,6 +73,10 @@ const Profile = () => {
             <small className="text-sm font-normal pb-0 my-0">Phone</small>
             <p>{data?.data?.phone}</p>
           </Card>
+          <Card className="p-5 my-3 gap-0 mx-5">
+            <small className="text-sm font-normal pb-0 my-0">Address</small>
+            <p>{data?.data?.address}</p>
+          </Card>
 
           {data?.data?.role === "DRIVER" && (
             <>

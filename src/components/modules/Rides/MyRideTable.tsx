@@ -229,7 +229,7 @@ const MyRideTable = () => {
           </form>
         </Form>
       </Card>
-      <Table>
+      <Table className="min-h-[65vh]">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Serial No</TableHead>

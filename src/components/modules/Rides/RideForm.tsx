@@ -127,7 +127,7 @@ const RideForm = () => {
               name="pickup"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Pickup</FormLabel>
+                  <FormLabel className="pb-1">Pickup</FormLabel>
                   <FormControl>
                     <LocationAutocomplete
                       value={field.value}
@@ -147,7 +147,7 @@ const RideForm = () => {
               name="destination"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Destination</FormLabel>
+                  <FormLabel className="pb-1">Destination</FormLabel>
                   <FormControl>
                     <LocationAutocomplete
                       value={field.value}
@@ -167,7 +167,7 @@ const RideForm = () => {
               name="fare"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Fare</FormLabel>
+                  <FormLabel className="pb-1">Fare</FormLabel>
                   <FormControl>
                     <Input disabled placeholder="30" type="string" {...field} />
                   </FormControl>
@@ -184,7 +184,7 @@ const RideForm = () => {
                 name="paymentMethod"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Payment Method</FormLabel>
+                    <FormLabel className="pb-1">Payment Method</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a payment method" />

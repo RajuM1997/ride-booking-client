@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -28,6 +29,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
+import LocationAutocomplete from "./LocationAutoComplete";
+import { useEffect, useState } from "react";
+import RideReqMap from "./RideReqMap";
 
 const registerSchema = z.object({
   pickup: z.string(),
@@ -35,6 +39,28 @@ const registerSchema = z.object({
   fare: z.string(),
   paymentMethod: z.string(),
 });
+
+interface LocationType {
+  lat: number;
+  lng: number;
+}
+const getDistanceInKm = (
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number
+) => {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
 
 const RideForm = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -49,12 +75,31 @@ const RideForm = () => {
   const dispatch = useAppDispatch();
   const [rideRequest] = useReqARideMutation();
   const navigate = useNavigate();
+  const [locations, setLocations] = useState<LocationType[]>([]);
+  useEffect(() => {
+    if (locations[0] && locations[1] && locations[0].lat && locations[1].lat) {
+      const distance = getDistanceInKm(
+        locations[0].lat,
+        locations[0].lng,
+        locations[1].lat,
+        locations[1].lng
+      );
+
+      const baseFare = 30;
+      const perKmFare = 10;
+      const calculatedFare = baseFare + distance * perKmFare;
+
+      form.setValue("fare", Math.round(calculatedFare).toString());
+    }
+  }, [locations]);
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     const rideInfo = {
       ...data,
       fare: Number(data.fare),
     };
+    console.log(rideInfo);
+
     const toastId = toast.loading("Ride Making...");
     try {
       const result = await rideRequest(rideInfo).unwrap();
@@ -73,8 +118,8 @@ const RideForm = () => {
   };
 
   return (
-    <div>
-      <Card className="p-5">
+    <div className="grid grid-cols-12 gap-6 place-items-center">
+      <Card className="p-5 col-span-12 lg:col-span-4 w-full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -84,15 +129,19 @@ const RideForm = () => {
                 <FormItem>
                   <FormLabel>Pickup</FormLabel>
                   <FormControl>
-                    <Input placeholder="Dhaka" {...field} />
+                    <LocationAutocomplete
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Search pickup location"
+                      setLocations={setLocations}
+                      index={0}
+                    />
                   </FormControl>
-                  <FormDescription className="sr-only">
-                    This is your public pickup.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="destination"
@@ -100,15 +149,19 @@ const RideForm = () => {
                 <FormItem>
                   <FormLabel>Destination</FormLabel>
                   <FormControl>
-                    <Input placeholder="Khulna" type="string" {...field} />
+                    <LocationAutocomplete
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Search destination"
+                      setLocations={setLocations}
+                      index={1}
+                    />
                   </FormControl>
-                  <FormDescription className="sr-only">
-                    This is your public destination.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="fare"
@@ -116,7 +169,7 @@ const RideForm = () => {
                 <FormItem>
                   <FormLabel>Fare</FormLabel>
                   <FormControl>
-                    <Input placeholder="30" type="string" {...field} />
+                    <Input disabled placeholder="30" type="string" {...field} />
                   </FormControl>
                   <FormDescription className="sr-only">
                     This is your public fare.
@@ -153,6 +206,9 @@ const RideForm = () => {
           </form>
         </Form>
       </Card>
+      <div className="col-span-12 lg:col-span-8 w-full">
+        <RideReqMap pickup={locations[0]} destination={locations[1]} />
+      </div>
     </div>
   );
 };

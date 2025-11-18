@@ -10,6 +10,7 @@ import { Car, User, ShieldCheck } from "lucide-react";
 export default function Features() {
   return (
     <div className="py-20 container mx-auto">
+      <title>GoTogether-Features-Page</title>
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
           Features

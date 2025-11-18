@@ -3,6 +3,7 @@ import DriverActiveRideTable from "@/components/modules/Driver/DriverActiveRideT
 const DriverActiveRide = () => {
   return (
     <div>
+      <title>GoTogether-Active-Ride-Page</title>
       <DriverActiveRideTable />
     </div>
   );

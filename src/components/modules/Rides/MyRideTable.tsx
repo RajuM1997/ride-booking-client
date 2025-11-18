@@ -77,7 +77,7 @@ const MyRideTable = () => {
     createdAt: date,
     startFare,
     endFare,
-    limit: 5,
+    limit: 10,
     page: currentPage,
   });
 

@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router";
 import CommonLayout from "./components/layout/CommonLayout";
 import { useEffect, useState } from "react";
-import SkeletonLoader from "./components/modules/SkeletonLoader";
+import LoadingHomePage from "./components/modules/LoadingHomePage";
 
 function App() {
   const { pathname } = useLocation();
@@ -24,7 +24,7 @@ function App() {
   }, [pathname]);
 
   if (loading) {
-    return <SkeletonLoader />;
+    return <LoadingHomePage />;
   }
   return (
     <CommonLayout>

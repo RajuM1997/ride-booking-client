@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import UpdateProfileModal from "@/components/modules/UpdateProfileModal";
 import ChangePassword from "@/components/modules/Authentication/ChangePasswordModal";
-import SkeletonLoader from "@/components/modules/Loader";
+import SkeletonLoader from "@/components/modules/SkeletonLoader";
 
 const Profile = () => {
   const { data, isLoading } = useUserInfoQuery(undefined);
@@ -13,6 +13,7 @@ const Profile = () => {
   }
   return (
     <div className="w-full h-full ">
+      <title>GoTogether-Profile-Page</title>
       <div className="w-full grid grid-cols-12 mx-auto gap-5">
         <Card className="py-0 gap-0 col-span-5">
           <div className="ml-auto pr-5 pt-5">

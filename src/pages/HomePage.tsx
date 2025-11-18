@@ -7,6 +7,7 @@ import { TestimonialSection } from "@/components/homePage/TestimonialSection";
 export default function HomePage() {
   return (
     <section>
+      <title>GoTogether-Home-Page</title>
       <HeroSection />
       <HowItWorkSection />
       <div className="container mx-auto">

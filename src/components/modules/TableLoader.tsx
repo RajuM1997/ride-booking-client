@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 export default function TableLoader() {
   return (
     <div>
-      <div className=" rounded-xl shadow-md p-4">
+      <div className=" rounded-xl bg-white min-h-screen dark:bg-gray-400 shadow-md p-4">
         <Skeleton height={30} width="25%" className="mb-4" />
         <div className="space-y-4">
           {[...Array(6)].map((_, i) => (

@@ -12,13 +12,13 @@ export default function ChartLoader() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Line Chart Skeleton */}
-        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-4">
+        <div className="bg-white dark:bg-gray-400 rounded-xl shadow-md p-4">
           <Skeleton height={30} width="40%" className="mb-4" />
           <Skeleton height={200} />
         </div>
 
         {/* Pie Chart Skeleton */}
-        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-4">
+        <div className="bg-white dark:bg-gray-400 rounded-xl shadow-md p-4">
           <Skeleton height={30} width="40%" className="mb-4" />
           <div className="flex justify-center items-center h-[200px]">
             <Skeleton circle height={150} width={150} />

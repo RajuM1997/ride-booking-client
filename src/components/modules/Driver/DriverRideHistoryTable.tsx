@@ -65,7 +65,7 @@ const DriverRideHistoryTable = () => {
   const [clearSearch, setClearSearch] = useState(false);
   const { data, isLoading } = useGetDriverRideQuery({
     page: currentPage,
-    limit: 1,
+    limit: 10,
     pickup,
     destination,
     createdAt: date,

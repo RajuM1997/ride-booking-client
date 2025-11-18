@@ -83,6 +83,7 @@ const Analytics = () => {
   return (
     <div>
       <div className="grid grid-cols-12 gap-5 py-5">
+        <title>GoTogether-Analytics-Page</title>
         {!activeDriverLoading && (
           <div className="col-span-12 md:col-span-4">
             <Card>

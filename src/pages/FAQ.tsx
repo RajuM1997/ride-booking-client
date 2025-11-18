@@ -44,6 +44,7 @@ export default function FAQ() {
 
   return (
     <div className=" py-20 container mx-auto">
+      <title>GoTogether-FAQ-Page</title>
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Frequently Asked Questions

@@ -7,7 +7,7 @@ export default function SkeletonLoader({ count = 6 }) {
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={index}
-          className="p-5 rounded-xl  shadow-lg border border-gray-200/40 dark:border-gray-700/40"
+          className="p-5 rounded-xl  shadow-lg border border-gray-200/40 dark:bg-gray-400"
         >
           {/* Avatar */}
           <div className="flex justify-center mb-4">

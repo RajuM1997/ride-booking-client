@@ -6,6 +6,7 @@ import { RegisterFormDriver } from "@/components/modules/Authentication/Register
 const Register = () => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
+      <title>GoTogether-Register-Page</title>
       <div className="bg-muted relative hidden lg:block">
         <img src={map} alt="Image" className=" h-full w-full object-cover" />
         <h3 className="hidden lg:block text-[#5DA600] text-lg font-bold absolute top-5 left-5">

@@ -3,6 +3,7 @@ import DriverRideHistoryTable from "@/components/modules/Driver/DriverRideHistor
 const DriverRideHistory = () => {
   return (
     <div>
+      <title>GoTogether-History-Page</title>
       <DriverRideHistoryTable />
     </div>
   );

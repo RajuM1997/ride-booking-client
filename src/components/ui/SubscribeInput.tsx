@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Field, FieldError } from "@/components/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
@@ -18,7 +18,7 @@ export default function SubscribeInput() {
           placeholder="Your best email for subscribe"
         />
         <InputGroupAddon align="inline-end">
-          <Button variant="ghost" aria-label="Subscribe" size="icon-xs">
+          <Button variant="ghost" aria-label="Subscribe" size="sm">
             <ArrowRightIcon />
           </Button>
         </InputGroupAddon>

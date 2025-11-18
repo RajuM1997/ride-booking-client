@@ -55,7 +55,7 @@ export default function RideDetailsPage() {
               <h2 className="text-xl font-semibold">Route Overview</h2>
             </CardHeader>
             <CardContent>
-              <div className="w-full h-86 bg-muted rounded-xl flex items-center justify-center text-muted-foreground">
+              <div className="w-full h-[480px] bg-muted rounded-xl flex items-center justify-center text-muted-foreground">
                 {pickup?.lat ? (
                   <RideMap destination={destination} pickup={pickup} />
                 ) : (

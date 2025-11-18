@@ -4,7 +4,8 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { Input, type InputProps } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
+type InputProps = React.ComponentProps<typeof Input>;
 import { Textarea, type TextareaProps } from "@/components/ui/textarea";
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
@@ -83,7 +84,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
 }
 
 function InputGroupInput({ className, ...props }: InputProps) {
-  return <Input className={className} unstyled {...props} />;
+  return <Input className={className} {...props} />;
 }
 
 function InputGroupTextarea({ className, ...props }: TextareaProps) {

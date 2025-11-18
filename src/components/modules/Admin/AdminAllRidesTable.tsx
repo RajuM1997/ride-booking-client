@@ -81,7 +81,7 @@ const AdminAllRidesTable = () => {
     rider,
     status,
     createdAt: date,
-    limit: 8,
+    limit: 10,
     page: currentPage,
   });
   const { data: drivers, isLoading: driverLoading } =

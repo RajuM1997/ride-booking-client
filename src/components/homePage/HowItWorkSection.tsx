@@ -1,5 +1,5 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
-// import howWorkBg from "@/assets/how-work-bg.png";
+import { motion } from "framer-motion";
 export default function HowItWorkSection() {
   return (
     <div
@@ -9,19 +9,34 @@ export default function HowItWorkSection() {
       className={`py-10 overflow-x-hidden`}
     >
       <div className="lg:px-40">
-        <h2 className="py-5 text-2xl font-semibold text-center">
+        <motion.h2
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="py-5 text-2xl font-semibold text-center"
+        >
           How It Works
-        </h2>
-        <p className="text-base text-center text-gray-600 dark:text-gray-300">
+        </motion.h2>
+        <motion.p
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-base text-center text-gray-600 dark:text-gray-300"
+        >
           Booking a ride has never been easier. Follow these simple steps to
           request, track, and complete your ride seamlessly — from start to
           finish, we make every journey smooth, safe, and reliable.
-        </p>
+        </motion.p>
       </div>
 
       <ol className="hidden md:block relative space-y-8 before:absolute before:top-0 before:left-1/2 before:h-full before:w-0.5 before:-translate-x-1/2 before:rounded-full before:bg-gray-200 dark:before:bg-gray-700 my-10">
         {/* Step 1 */}
-        <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">
+        <motion.li
+          initial={{ x: -40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3"
+        >
           <div className="relative flex items-start gap-1 md:gap-4 group-odd:flex-row-reverse md:group-odd:text-right group-even:order-last">
             <span className="w-5 h-5 shrink-0 rounded-full bg-[#70AE00]"></span>
 
@@ -36,7 +51,7 @@ export default function HowItWorkSection() {
             </div>
           </div>
           <div aria-hidden="true"></div>
-        </li>
+        </motion.li>
 
         {/* Step 2 */}
         <li className="group relative grid grid-cols-2 odd:-me-3 even:-ms-3">

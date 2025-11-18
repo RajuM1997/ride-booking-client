@@ -115,9 +115,9 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center w-full justify-end gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
+            <Link to="/" className="text-primary hover:text-primary/90">
               <h3 className="text-lg font-bold">GoTogether</h3>
-            </a>
+            </Link>
           </div>
         </div>
         {/* Right side */}

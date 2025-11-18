@@ -17,12 +17,15 @@ import Features from "@/pages/Features";
 import Contact from "@/pages/Contact";
 import FAQ from "@/pages/FAQ";
 import { lazy } from "react";
+import NotFound from "@/pages/NotFoundPage";
+import ErrorPage from "@/pages/ErrorPage";
 
 const RiderDetails = lazy(() => import("@/pages/Rider/RiderDetails"));
 
 export const router = createBrowserRouter([
   {
     Component: App,
+    errorElement: <ErrorPage />,
     path: "/",
     children: [
       {
@@ -88,5 +91,9 @@ export const router = createBrowserRouter([
   {
     Component: Unauthorized,
     path: "unauthorized",
+  },
+  {
+    Component: NotFound,
+    path: "*",
   },
 ]);

@@ -61,36 +61,35 @@ The project is built with **modular architecture**, **reusable components**, and
 
 ## 📁 Folder Structure
 
-src
-├── assets
-├── components
-│ ├── homePage
-│ ├── layout
-│ └── modules
+├── assets # Images, icons, and static assets
+├── components # Reusable UI components
+│ ├── homePage # Components specific to Home page
+│ ├── layout # Layout components (Navbar, Footer, etc.)
+│ └── modules # Feature-based modules
+│ ├── admin # Admin-specific components
+│ ├── rider # Rider-specific components
+│ ├── driver # Driver-specific components
+│ └── authentication # Login, Signup, Auth components
+├── config # App configuration files
+├── constants # Constants and enums
+├── context # React Context providers
+├── hooks # Custom React hooks
+├── lib # Utility libraries
+├── pages # Route-based page components
 │ ├── admin
 │ ├── rider
 │ ├── driver
 │ └── authentication
-├── config
-├── constants
-├── context
-├── hooks
-├── lib
-├── pages
-│ ├── admin
-│ ├── rider
-│ ├── driver
-│ └── authentication
-├── providers
-├── redux
-│ ├── features
+├── providers # Third-party providers
+├── redux # Redux store and slices
+│ ├── features # Feature-specific slices
 │ │ ├── admin
 │ │ ├── rider
 │ │ ├── driver
 │ │ ├── auth
 │ │ └── user
-├── types
-└── utils
+├── types # TypeScript type definitions
+└── utils # Utility functions
 
 ---
 

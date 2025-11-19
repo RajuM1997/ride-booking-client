@@ -127,6 +127,12 @@ const BookRide = () => {
             status to Online.
           </TableCaption>
         )}
+        {!data?.data?.length && (
+          <TableCaption>
+            No ride requests are available right now. Please wait for a rider to
+            submit a request.
+          </TableCaption>
+        )}
       </Table>
     </div>
   );

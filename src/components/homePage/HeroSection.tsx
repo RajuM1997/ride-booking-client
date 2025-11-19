@@ -17,7 +17,7 @@ export default function HeroSection() {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black/80"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/70"></div>
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-1 gap-6 items-center h-full md:px-16">
         <div className="text-center">

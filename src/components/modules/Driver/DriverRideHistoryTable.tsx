@@ -10,6 +10,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -191,7 +192,7 @@ const DriverRideHistoryTable = () => {
           </form>
         </Form>
       </Card>
-      <Table className="min-h-[65vh]">
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Serial No</TableHead>
@@ -222,6 +223,12 @@ const DriverRideHistoryTable = () => {
               </TableRow>
             ))}
         </TableBody>
+        {!data?.data?.length && (
+          <TableCaption>
+            You don’t have any history yet. Book a ride to see your ride history
+            here.
+          </TableCaption>
+        )}
       </Table>
       {totalPage > 1 && (
         <div className="flex justify-center mt-4">

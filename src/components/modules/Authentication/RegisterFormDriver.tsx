@@ -41,6 +41,7 @@ const registerSchema = z
     vehicleNumber: z.string(),
     address: z.string(),
     phone: z.string(),
+    role: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password do not match",
@@ -65,6 +66,7 @@ export function RegisterFormDriver({
       vehicleNumber: "",
       address: "",
       phone: "",
+      role: "DRIVER",
     },
   });
 
@@ -75,13 +77,15 @@ export function RegisterFormDriver({
       password: data.password,
       address: data.address,
       phone: data.phone,
+      role: "DRIVER",
       driver: {
         licenseNumber: data.licenseNumber,
         vehicleType: data.vehicleType,
         vehicleNumber: data.vehicleNumber,
-        role: "DRIVER",
       },
     };
+    console.log(userInfo);
+
     const toastId = toast.loading("Login...");
     try {
       await register(userInfo).unwrap();

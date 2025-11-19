@@ -33,6 +33,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -229,7 +230,7 @@ const MyRideTable = () => {
           </form>
         </Form>
       </Card>
-      <Table className="min-h-[65vh]">
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Serial No</TableHead>
@@ -267,6 +268,12 @@ const MyRideTable = () => {
               </TableRow>
             ))}
         </TableBody>
+        {!data?.data?.length && (
+          <TableCaption>
+            You don’t have any rides at the moment. Request a ride to view your
+            details here.
+          </TableCaption>
+        )}
       </Table>
       {totalPage > 1 && (
         <div className="flex justify-center mt-4">

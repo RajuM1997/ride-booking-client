@@ -8,6 +8,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -94,6 +95,12 @@ const DriverActiveRideTable = () => {
               </TableRow>
             ))}
         </TableBody>
+        {!data?.data?.length && (
+          <TableCaption>
+            You don’t have any active rides at the moment. Accept a ride to view
+            your details here.
+          </TableCaption>
+        )}
       </Table>
     </div>
   );

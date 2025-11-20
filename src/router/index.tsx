@@ -56,6 +56,7 @@ export const router = createBrowserRouter([
   },
   {
     Component: withAuth(DashboardLayout, role.admin as TRole),
+    errorElement: <ErrorPage />,
     path: "/admin",
     children: [
       { index: true, element: <Navigate to="/admin/analytic" /> },
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
   {
     Component: withAuth(DashboardLayout, role.driver as TRole),
     path: "/driver",
-
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Navigate to="/driver/analytic" /> },
       ...generateRoutes(driverSidebarItems),
@@ -74,6 +75,7 @@ export const router = createBrowserRouter([
   {
     Component: withAuth(DashboardLayout, role.rider as TRole),
     path: "/rider",
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Navigate to="/rider/my-ride" /> },
       ...generateRoutes(riderSidebarItems),

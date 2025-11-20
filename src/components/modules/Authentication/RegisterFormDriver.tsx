@@ -84,7 +84,6 @@ export function RegisterFormDriver({
         vehicleNumber: data.vehicleNumber,
       },
     };
-    console.log(userInfo);
 
     const toastId = toast.loading("Login...");
     try {

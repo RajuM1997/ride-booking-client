@@ -1,10 +1,6 @@
-import { useTheme } from "@/hooks/useTheme";
 import Skeleton from "react-loading-skeleton";
 
 export default function DashboardSkeleton() {
-  const { theme } = useTheme();
-  console.log(theme);
-
   return (
     <div className="flex min-h-screen gap-4 p-4">
       {/* Sidebar */}

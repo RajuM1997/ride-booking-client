@@ -32,7 +32,6 @@ const DriverActiveRideTable = () => {
       id,
       status,
     };
-    console.log(data);
 
     const toastId = toast.loading("Status Updating...");
     try {

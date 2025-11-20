@@ -57,8 +57,6 @@ const AdminUserActivityUpdate = ({ profileData }: Props) => {
     };
     const toastId = toast.loading("Updating driver status...");
     try {
-      console.log(userInfo);
-
       const result = await updateDriverProfile(userInfo).unwrap();
       if (result.success) {
         toast.success("Driver status updated successfully", { id: toastId });

@@ -64,7 +64,6 @@ const AllUsersTable = () => {
   });
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    console.log("Active tab value:", value);
   };
 
   const handleSearch = async (data: z.infer<typeof searchSchema>) => {

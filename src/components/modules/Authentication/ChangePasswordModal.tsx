@@ -57,7 +57,6 @@ const ChangePassword = () => {
     const toastId = toast.loading("Password updating...");
     try {
       const result = await changePassword(data).unwrap();
-      console.log(result);
 
       if (result.success) {
         setOpen(false);

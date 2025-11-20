@@ -35,7 +35,6 @@ export default function RideDetailsPage() {
     { label: "Ride Started", time: "10:25 AM", status: "done" },
     { label: "Ride Completed", time: "10:55 AM", status: "active" },
   ];
-  console.log(pickup);
 
   return (
     <section className="py-15">
@@ -162,7 +161,7 @@ export default function RideDetailsPage() {
                               <Clock className="h-4 w-4" />
                               {format(
                                 new Date(item.currentTimeTamp),
-                                "yyyy-MM-dd"
+                                "yyyy-MM-dd hh:mm a"
                               )}
                             </div>
                           </div>

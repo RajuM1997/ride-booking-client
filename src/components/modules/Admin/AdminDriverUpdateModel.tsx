@@ -57,8 +57,6 @@ const AdminDriverUpdatedModel = ({ profileData }: Props) => {
     };
     const toastId = toast.loading("Updating activity status...");
     try {
-      console.log(userInfo);
-
       const result = await updateDriverProfile(userInfo).unwrap();
       if (result.success) {
         toast.success("Activity status updated successfully", { id: toastId });
@@ -67,7 +65,6 @@ const AdminDriverUpdatedModel = ({ profileData }: Props) => {
     } catch (error: unknown) {
       setOpen(false);
       const err = error as IErrorResponse;
-      console.log(err);
 
       toast.error(err?.data?.errorSources[0]?.message, { id: toastId });
     }

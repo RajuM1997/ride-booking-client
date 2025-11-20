@@ -8,7 +8,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import type { IErrorResponse } from "@/types";
@@ -33,7 +32,6 @@ export function LoginForm({
       }
     } catch (error: unknown) {
       const err = error as IErrorResponse;
-      console.log(error);
       toast.error(err.data.message);
       if (err.data.message === "Your account is not verified") {
         toast.error("Your account is not verified");
@@ -99,7 +97,7 @@ export function LoginForm({
           </form>
         </Form>
 
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+        {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
             Or continue with
           </span>
@@ -112,7 +110,7 @@ export function LoginForm({
           onClick={() => window.open(`${config.baseUrl}/auth/google`)}
         >
           Login with Google
-        </Button>
+        </Button> */}
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

@@ -98,7 +98,6 @@ const RideForm = () => {
       ...data,
       fare: Number(data.fare),
     };
-    console.log(rideInfo);
 
     const toastId = toast.loading("Ride Making...");
     try {

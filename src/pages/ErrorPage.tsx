@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ErrorPage() {
   const error: any = useRouteError();
-  console.error(error);
+  console.log(error);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },

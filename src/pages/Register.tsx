@@ -3,6 +3,7 @@ import { GalleryVerticalEnd } from "lucide-react";
 import map from "@/assets/ride-booking.jpg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RegisterFormDriver } from "@/components/modules/Authentication/RegisterFormDriver";
+import { Link } from "react-router";
 const Register = () => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -15,12 +16,12 @@ const Register = () => {
       </div>
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="#" className="flex items-center gap-2 font-medium">
+          <Link to="/" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
             GoTogether
-          </a>
+          </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full ">

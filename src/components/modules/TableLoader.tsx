@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-export default function TableLoader() {
+const TableLoader = () => {
   return (
     <div>
       <div className=" rounded-xl bg-white min-h-screen dark:bg-gray-400 shadow-md p-4">
@@ -19,4 +19,5 @@ export default function TableLoader() {
       </div>
     </div>
   );
-}
+};
+export default TableLoader;

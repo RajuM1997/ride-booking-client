@@ -34,7 +34,6 @@ const LocationAutocomplete = ({
         `https://nominatim.openstreetmap.org/search?format=json&q=${query}&addressdetails=1&limit=10&countrycodes=bd`
       );
       const data = await res.json();
-      console.log(data);
 
       setSuggestions(data);
     } finally {
